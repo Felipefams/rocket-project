@@ -9,3 +9,5 @@ class Crewman{
         this.patent = patent;
     }
 }
+
+export default Crewman;

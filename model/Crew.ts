@@ -1,10 +1,11 @@
 class Crew{
-    name : string;
-    ID : number;
-    launchId : number;
-    crewCrewmanId: number;
-    constructor(name : string, ID : number){
+    public name: string;
+    public id: number;
+    private crewCrewmanId: number;
+    constructor(name: string, id: number, crewCrewmanId: number){
         this.name = name;
-        this.ID = ID;
+        this.id = id;
+        this.crewCrewmanId = crewCrewmanId;
     }
 }
+export default Crew;
