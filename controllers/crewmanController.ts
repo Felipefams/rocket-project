@@ -1,6 +1,6 @@
 import express from 'express';
 
-export const getAllCrewmans = (req: express.Request, res: express.Response) => {
+export const getAllCrewmen = (req: express.Request, res: express.Response) => {
     res.status(200).send("requisicao de todos os Crewmans!");
     //chama o service
 }
