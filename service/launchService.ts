@@ -1,24 +1,22 @@
 import express, { response } from 'express';
-import * as launchService from '../service/launchService';
-// import dotenv from "dotenv";
-
+import * as launchRepository from '../repository/launchRepository';
 
 export const getAlllaunchs = async (req: express.Request, res: express.Response) => {
-    return launchService.getAllLaunchs(req, res); 
+    return launchRepository.getAllLaunchs(req, res); 
 }
 
 export const createNewlaunch = async (req: express.Request, res: express.Response) => {
-    return launchService.createNewLaunch(req, res); 
+    return launchRepository.createNewLaunch(req, res); 
 }
 
 export const getlaunch = async (req: express.Request, res: express.Response) => { 
-    return launchService.getLaunch(req, res); 
+    return launchRepository.getLaunch(req, res);
 }
 
 export const updatelaunch = async (req: express.Request, res: express.Response) => {
-    return launchService.updateLaunch(req, res); 
+    return launchRepository.updateLaunch(req, res); 
 }
 
 export const deletelaunch = async (req: express.Request, res: express.Response) => {
-    return launchService.deleteLaunch(req, res); 
+    return launchRepository.deleteLaunch(req, res); 
 }

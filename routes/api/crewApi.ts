@@ -4,10 +4,10 @@ const router = express.Router();
 
 router.route('/')
     .get(getAllCrews)
+    .post(createNewCrew)
 
 router.route('/:id')
     .get(getCrew)
-    .post(createNewCrew)
     .put(updateCrew)
     .delete(deleteCrew)
 

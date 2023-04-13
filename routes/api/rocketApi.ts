@@ -4,10 +4,10 @@ const router = express.Router();
 
 router.route('/')
     .get(getAllRockets)
+    .post(createNewRocket)
 
 router.route('/:id')
     .get(getRocket)
-    .post(createNewRocket)
     .put(updateRocket)
     .delete(deleteRocket)
 

@@ -4,10 +4,10 @@ const router = express.Router();
 
 router.route('/')
     .get(getAllLaunchs)
+    .post(createNewLaunch)
 
 router.route('/:id')
     .get(getLaunch)
-    .post(createNewLaunch)
     .put(updateLaunch)
     .delete(deleteLaunch)
 
