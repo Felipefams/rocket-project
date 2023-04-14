@@ -18,7 +18,14 @@ export const getAllRockets = async (req: express.Request, res: express.Response)
 
 export const createNewRocket = async (req: express.Request, res: express.Response) => {
     try {
-        return fetch(mountEndpoint(Endpoints.rocket), { method: "POST" })
+        return fetch(mountEndpoint(Endpoints.rocket), {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+                name: req.body.name,
+            }
+            )
+        })
             .then(response => {
                 return response.json()
             })
@@ -46,7 +53,14 @@ export const getRocket = async (req: express.Request, res: express.Response) => 
 
 export const updateRocket = async (req: express.Request, res: express.Response) => {
     try {
-        return fetch(mountEndpointWithId(Endpoints.rocket, req.params.id), { method: "PUT" })
+        return fetch(mountEndpointWithId(Endpoints.rocket, req.params.id), {
+            method: "PUT",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+                name: req.body.name,
+            }
+            )
+        })
             .then(response => {
                 return response.json()
             })

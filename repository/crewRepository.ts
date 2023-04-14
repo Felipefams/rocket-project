@@ -18,7 +18,15 @@ export const getAllCrews = async (req: express.Request, res: express.Response) =
 
 export const createNewCrew = async (req: express.Request, res: express.Response) => {
     try {
-        return fetch(mountEndpoint(Endpoints.crew), { method: "POST" })
+        return fetch(mountEndpoint(Endpoints.crew), {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+                name: req.body.name,
+                crewCrewmanId: req.body.crewCrewmanId
+            }
+            )
+        })
             .then(response => {
                 return response.json()
             })
@@ -46,7 +54,15 @@ export const getCrew = async (req: express.Request, res: express.Response) => {
 
 export const updateCrew = async (req: express.Request, res: express.Response) => {
     try {
-        return fetch(mountEndpointWithId(Endpoints.crew, req.params.id), { method: "PUT" })
+        return fetch(mountEndpointWithId(Endpoints.crew, req.params.id), {
+            method: "PUT",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+                name: req.body.name,
+                crewCrewmanId: req.body.crewCrewmanId
+            }
+            )
+        })
             .then(response => {
                 return response.json()
             })

@@ -18,7 +18,17 @@ export const getAllLaunchs = async (req: express.Request, res: express.Response)
 
 export const createNewLaunch = async (req: express.Request, res: express.Response) => {
     try {
-        return fetch(mountEndpoint(Endpoints.launch), { method: "POST" })
+        return fetch(mountEndpoint(Endpoints.launch), {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+                launchCode: req.body.launchCode,
+                date: req.body.date,
+                success: req.body.success,
+                rocketId: req.body.rocketId,
+                crewId: req.body.crewId
+            })
+        })
             .then(response => {
                 return response.json()
             })
@@ -46,7 +56,17 @@ export const getLaunch = async (req: express.Request, res: express.Response) => 
 
 export const updateLaunch = async (req: express.Request, res: express.Response) => {
     try {
-        return fetch(mountEndpointWithId(Endpoints.launch, req.params.id), { method: "PUT" })
+        return fetch(mountEndpointWithId(Endpoints.launch, req.params.id), {
+            method: "PUT",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+                launchCode: req.body.launchCode,
+                date: req.body.date,
+                success: req.body.success,
+                rocketId: req.body.rocketId,
+                crewId: req.body.crewId
+            })
+        })
             .then(response => {
                 return response.json()
             })
