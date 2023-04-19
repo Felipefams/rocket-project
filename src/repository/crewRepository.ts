@@ -1,6 +1,18 @@
 import express, { response } from 'express';
 import { Endpoints } from '../enums';
 import { mountEndpoint, mountEndpointWithId } from '../utils/stringUtils';
+import { DataSource, EntityRepository, Repository } from 'typeorm';
+import Crew from '../model/Crew';
+import AppDataSource from '../data-source';
+
+export const CrewRepository = AppDataSource.getRepository(Crew).extend({
+     
+    async getAllCrews(req: express.Request, res: express.Response){
+        return this.dataSource
+        .getRepository(Crew)
+        .find()
+    } 
+})
 
 export const getAllCrews = async (req: express.Request, res: express.Response) => {
     try {

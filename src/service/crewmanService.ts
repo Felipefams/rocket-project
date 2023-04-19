@@ -1,6 +1,7 @@
 import express, { response } from 'express';
 import * as crewmanRepository from '../repository/crewmanRepository';
 
+
 export const getAllCrewmen = async (req: express.Request, res: express.Response) => {
     return crewmanRepository.getAllCrewmen(req, res); 
 }

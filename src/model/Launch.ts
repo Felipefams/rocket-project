@@ -1,17 +1,36 @@
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import Rocket from "./Rocket";
+import Crew from "./Crew";
+
+@Entity("launch")
 class Launch{
+    @PrimaryGeneratedColumn()
     id: number;
+
+    @Column()
     launchCode: number;
+
+    @Column()
     date: string;
+
+    @Column()
     success: boolean;
-    rocketId: number;
-    crewId: number;
-    constructor(id: number, launch: number, date: string, success: boolean, rocketId: number, crewId: number){
+
+    @OneToOne(() => Rocket)
+    @JoinColumn({name: "rocket_id"})
+    rocket: Rocket;
+
+    @OneToOne(() => Crew)
+    @JoinColumn({name: "crew_id"})
+    crew: Crew;
+
+    constructor(id: number, launch: number, date: string, success: boolean, rocket: Rocket, crew: Crew){
         this.id = id;
         this.launchCode = launch;
         this.date =date;
         this.success = success;
-        this.rocketId = rocketId;
-        this.crewId = crewId;
+        this.rocket = rocket;
+        this.crew = crew;
     }
 }
 

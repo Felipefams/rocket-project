@@ -1,21 +1,23 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import Crewman from "./Crewman";
 
 @Entity("crew")
 class Crew{
     @PrimaryGeneratedColumn()
-    public id: number;
+    id: number;
 
     @Column()
-    public name: string; 
-    // private crewCrewmanId: number;
+    name: string;
 
-    @CreateDateColumn()
-    public created_at: Date | undefined;
+    @ManyToMany(() => Crewman)
+    @JoinTable({name: "crew_crewman"})
+    crewman : Crewman[];
 
-    constructor(name: string, id: number, crewCrewmanId: number){
+    constructor(name: string, id: number, crewman: Crewman[]){
         this.name = name;
         this.id = id;
-        // this.crewCrewmanId = crewCrewmanId;
+        this.crewman = crewman;
     }
+    
 }
 export default Crew;

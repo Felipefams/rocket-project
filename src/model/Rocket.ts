@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import Launch from "./Launch";
 
 @Entity("rocket")
 class Rocket{
@@ -6,7 +7,8 @@ class Rocket{
     id : number; 
 
     @Column()
-    name : string;
+    name : string; 
+
     constructor(name : string, id : number){
         this.name = name;
         this.id = id;

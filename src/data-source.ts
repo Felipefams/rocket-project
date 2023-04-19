@@ -4,23 +4,20 @@ const AppDataSource = new DataSource({
     type: "postgres",
     host: "rocket-plank.postgres.database.azure.com",
     port: 5432,
+    database: "rocket-project",
     username: "felipe",
     password: "Teste123@",
-    database: "rocket-project",
-    ssl:true,
+    // ssl: true, //require_secure_transport OFF
     entities: [__dirname + "/model/*.ts"],
     migrations: [__dirname + '/database/migrations/*.ts'],
 })
 
-/*
-const getDatasource = async () =>
-    await AppDataSource.initialize()
+AppDataSource.initialize()
     .then(() => {
-            console.log("Data Source has been initialized!")
-        })
-        .catch((err) => {
-            console.error("Error during Data Source initialization", err)
-        })
-*/
+        console.log("Data Source has been initialized!")
+    })
+    .catch((err) => {
+        console.error("Error during Data Source initialization", err)
+    })
 
 export default AppDataSource;
