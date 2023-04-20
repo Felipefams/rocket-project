@@ -1,24 +1,26 @@
-import express, { response } from 'express';
 import {} from '../repository/crewRepository';
+import Crew from '../model/Crew';
 import { CrewRepository } from '../repository/crewRepository';
+import { CrewRequest } from '../../types';
 
-
-export const getAllCrews = async (req: express.Request, res: express.Response) => {
-    return CrewRepository.getAllCrews(req, res); 
+export const getAllCrews = async () => {
+    return CrewRepository.getAllCrews();
 }
 
-// export const createNewCrew = async (req: express.Request, res: express.Response) => {
-//     return crewRepository.createNewCrew(req, res); 
-// }
+export const createNewCrew = async (crew : Crew) => {
+    return CrewRepository.createNewCrew(crew); 
+}
 
-// export const getCrew = async (req: express.Request, res: express.Response) => { 
-//     return crewRepository.getCrew(req, res);
-// }
+export const getCrew = async ({id} : CrewRequest) => { 
+    return CrewRepository.getCrew({id}); 
+}
 
-// export const updateCrew = async (req: express.Request, res: express.Response) => {
-//     return crewRepository.updateCrew(req, res); 
-// }
+export const updateCrew = async ({id, name} : CrewRequest) => {
+    const crew = new Crew(name)
 
-// export const deleteCrew = async (req: express.Request, res: express.Response) => {
-//     return crewRepository.deleteCrew(req, res); 
-// }
+    return CrewRepository.updateCrew({id, name}); 
+}
+
+export const deleteCrew = async ({id} : CrewRequest) => {
+    return CrewRepository.deleteCrew(id); 
+}

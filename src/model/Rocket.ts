@@ -9,9 +9,8 @@ class Rocket{
     @Column()
     name : string; 
 
-    constructor(name : string, id : number){
+    constructor(name : string){
         this.name = name;
-        this.id = id;
     }
 }
 

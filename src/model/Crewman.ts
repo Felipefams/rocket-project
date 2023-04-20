@@ -16,9 +16,8 @@ class Crewman{
     @JoinTable({name:"crew_crewman"})
     crew: Crew[];
 
-    constructor(id: number, name: string, patent: string){
+    constructor(name: string, patent: string){
         this.name = name;
-        this.id = id;
         this.patent = patent;
     }
 }

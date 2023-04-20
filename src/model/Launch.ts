@@ -24,8 +24,7 @@ class Launch{
     @JoinColumn({name: "crew_id"})
     crew: Crew;
 
-    constructor(id: number, launch: number, date: string, success: boolean, rocket: Rocket, crew: Crew){
-        this.id = id;
+    constructor(launch: number, date: string, success: boolean, rocket: Rocket, crew: Crew){
         this.launchCode = launch;
         this.date =date;
         this.success = success;
