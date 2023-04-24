@@ -3,7 +3,7 @@ import Rocket from "./Rocket";
 import Crew from "./Crew";
 
 @Entity("launch")
-class Launch{
+export class Launch{
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -16,16 +16,16 @@ class Launch{
     @Column()
     success: boolean;
 
-    @OneToOne(() => Rocket)
+    @OneToOne(() => Rocket, {eager: true})
     @JoinColumn({name: "rocket_id"})
     rocket: Rocket;
 
-    @OneToOne(() => Crew)
+    @OneToOne(() => Crew, {eager: true})
     @JoinColumn({name: "crew_id"})
     crew: Crew;
 
-    constructor(launch: number, date: string, success: boolean, rocket: Rocket, crew: Crew){
-        this.launchCode = launch;
+    constructor(launchCode: number, date: string, success: boolean, rocket: Rocket, crew: Crew){
+        this.launchCode = launchCode;
         this.date =date;
         this.success = success;
         this.rocket = rocket;

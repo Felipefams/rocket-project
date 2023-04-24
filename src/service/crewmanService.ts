@@ -1,23 +1,32 @@
-import express, { response } from 'express';
-import * as crewmanRepository from '../repository/crewmanRepository';
+import { Crewman } from "../model/Crewman"
+import { CrewmanRepository } from "../repository/crewmanRepository";
 
-
-export const getAllCrewmen = async (req: express.Request, res: express.Response) => {
-    return crewmanRepository.getAllCrewmen(req, res); 
+export const getAllCrewmen = async () => {
+    return CrewmanRepository.getAllCrewmen();
 }
 
-export const createNewCrewman = async (req: express.Request, res: express.Response) => {
-    return crewmanRepository.createNewCrewman(req, res); 
+export const createNewCrewman = async (crewman: Partial<Crewman>) => {
+    return CrewmanRepository.createNewCrewman(crewman);
 }
 
-export const getCrewman = async (req: express.Request, res: express.Response) => { 
-    return crewmanRepository.getCrewman(req, res);
+export const getCrewman = async (id: number) => {
+    const crew = await CrewmanRepository.getCrewman(id);
+
+    //todo melhorar esse tratamento
+    if (crew == null || crew == undefined) throw new Error("cant find user with id " + id);
+
+    return crew;
 }
 
-export const updateCrewman = async (req: express.Request, res: express.Response) => {
-    return crewmanRepository.updateCrewman(req, res); 
+export const updateCrewman = async (id: number, crewman: Partial<Crewman>) => {
+    const crew = CrewmanRepository.updateCrewman(id, crewman);
+    if (crew == null || crew == undefined) throw new Error("cant find user with id " + id);
+    return crew;
 }
 
-export const deleteCrewman = async (req: express.Request, res: express.Response) => {
-    return crewmanRepository.deleteCrewman(req, res); 
+export const deleteCrewman = async (id: number) => {
+    const crew = await CrewmanRepository.getCrewman(id);
+    if (crew == null || crew == undefined) throw new Error("cant find user with id " + id);
+
+    return CrewmanRepository.deleteCrewman(id);
 }

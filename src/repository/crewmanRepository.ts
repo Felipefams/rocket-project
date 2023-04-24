@@ -1,90 +1,30 @@
-import express, { response } from 'express';
-import { Endpoints } from '../enums';
-import { mountEndpoint, mountEndpointWithId } from '../utils/stringUtils';
+import { Crewman } from "../model/Crewman"
+import AppDataSource from '../data-source';
+import { IsNull } from "typeorm";
 
-export const getAllCrewmen = async (req: express.Request, res: express.Response) => {
-    try {
-        return fetch(mountEndpoint(Endpoints.crewman))
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                res.status(200).send(body);
-            })
-    } catch (err) {
-        console.error(err);
-    }
-}
 
-export const createNewCrewman = async (req: express.Request, res: express.Response) => {
-    try {
-        return fetch(mountEndpoint(Endpoints.crewman), {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({
-                name: req.body.name,
-                patent: req.body.patent
-            }
-            )
-        })
+export const CrewmanRepository = AppDataSource.getRepository(Crewman).extend({
 
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                res.status(200).send(body + "requisicao para criar os Crewmans!");
-            })
-    } catch (err) {
-        console.error(err);
-    }
-}
+    async getAllCrewmen() {
+        return await CrewmanRepository.find();
+    },
+    async createNewCrewman(crew: Partial<Crewman>) {
+        const crewman = CrewmanRepository.create(crew);
+        await CrewmanRepository.save(crew);
+        return crewman;
+    },
 
-export const getCrewman = async (req: express.Request, res: express.Response) => {
-    try {
-        return fetch(mountEndpointWithId(Endpoints.crewman, req.params.id), { method: "GET" })
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                res.status(200).send(body);
-            })
-    } catch (err) {
-        console.error(err);
-    }
-}
+    async getCrewman(id: number) {
+        const crew = await CrewmanRepository.findOne({ where: { id: id } }); 
+        return crew;
+    },
 
-export const updateCrewman = async (req: express.Request, res: express.Response) => {
-    try {
-        return fetch(mountEndpointWithId(Endpoints.crewman, req.params.id), {
-            method: "PUT",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({
-                name: req.body.name,
-                patent: req.body.patent
-            }
-            )
-        })
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                res.status(200).send(body);
-            })
-    } catch (err) {
-        console.error(err);
-    }
-}
+    async updateCrewman(id: number, crew: Partial<Crewman>) {
+        await CrewmanRepository.update(id , crew);
+        return await CrewmanRepository.findOne({ where: { id: id } });
+    },
 
-export const deleteCrewman = async (req: express.Request, res: express.Response) => {
-    try {
-        return fetch(mountEndpointWithId(Endpoints.crewman, req.params.id), { method: "DELETE" })
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                res.status(200).send(body);
-            })
-    } catch (err) {
-        console.error(err);
-    }
-}
+    async deleteCrewman(id: number) { 
+        return await CrewmanRepository.delete( id );
+    },
+})

@@ -1,5 +1,5 @@
 import Crew from "../src/model/Crew";
-import Crewman from "../src/model/Crewman";
+import {Crewman} from "../src/model/Crewman";
 import Rocket from "../src/model/Rocket";
 
 export type CrewRequest = {
@@ -17,7 +17,7 @@ export type CrewmanRequest = {
 
 export type RocketRequest = {
     id? : number;
-    column? : string;
+    name? : string;
 }
 
 export type LaunchRequest = {

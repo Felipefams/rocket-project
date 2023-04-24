@@ -5,36 +5,27 @@ import { CrewRequest } from '../../types';
 export const CrewRepository = AppDataSource.getRepository(Crew).extend({
 
     async getAllCrews() {
-        return AppDataSource
-            .getRepository(Crew)
-            .find()
+        return await CrewRepository.find()
     },
 
     async createNewCrew(crew: Crew) {
-        return AppDataSource
-            .getRepository(Crew)
-            .insert(crew)
+        return await CrewRepository.save(CrewRepository.create(crew));
     },
 
-    async getCrew({id}: CrewRequest) {
-        return AppDataSource
-            .getRepository(Crew)
-            .findBy({
-                id: id,
-            },
-            )
+    async getCrew(id: number) {
+        return await CrewRepository.findOneBy({ id: id })
     },
 
-    async updateCrew({ id, name }: CrewRequest) {
-        return AppDataSource
-            .getRepository(Crew)
-            .update(id, { name: name })
+    async updateCrew(id: number, crew: Partial<Crew>) {
+        const newCrew = await CrewRepository.getCrew(id);
+        Object.assign(newCrew, crew);
+        await CrewRepository.save(newCrew);
+
+        return await CrewRepository.findOne({ where: { id: id } });
     },
 
     async deleteCrew(id: number) {
-        return AppDataSource
-            .getRepository(Crew)
-            .delete(id)
+        return await CrewRepository.delete(id)
     }
 
 })

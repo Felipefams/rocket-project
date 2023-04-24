@@ -1,87 +1,29 @@
 import express, { response } from 'express';
 import { Endpoints } from '../enums';
 import { mountEndpoint, mountEndpointWithId } from '../utils/stringUtils';
+import AppDataSource from '../data-source';
+import Rocket from '../model/Rocket';
+import { RocketRequest } from '../../types';
 
-export const getAllRockets = async (req: express.Request, res: express.Response) => {
-    try {
-        return fetch(mountEndpoint(Endpoints.rocket))
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                res.status(200).send(body);
-            })
-    } catch (err) {
-        console.error(err);
-    }
-}
+export const RocketRepository = AppDataSource.getRepository(Rocket).extend({
 
-export const createNewRocket = async (req: express.Request, res: express.Response) => {
-    try {
-        return fetch(mountEndpoint(Endpoints.rocket), {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({
-                name: req.body.name,
-            }
-            )
-        })
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                res.status(200).send(body + "requisicao para criar os rockets!");
-            })
-    } catch (err) {
-        console.error(err);
-    }
-}
+    async getAllRockets() {
+        return RocketRepository.find()
+    },
 
-export const getRocket = async (req: express.Request, res: express.Response) => {
-    try {
-        return fetch(mountEndpointWithId(Endpoints.rocket, req.params.id), { method: "GET" })
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                res.status(200).send(body);
-            })
-    } catch (err) {
-        console.error(err);
-    }
-}
+    async createNewRocket(rocket: Rocket) {
+        return RocketRepository.insert(rocket)
+    },
 
-export const updateRocket = async (req: express.Request, res: express.Response) => {
-    try {
-        return fetch(mountEndpointWithId(Endpoints.rocket, req.params.id), {
-            method: "PUT",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({
-                name: req.body.name,
-            }
-            )
-        })
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                res.status(200).send(body);
-            })
-    } catch (err) {
-        console.error(err);
-    }
-}
+    async getRocket(id: number) {
+        return RocketRepository.findOneBy({ id: id })
+    },
 
-export const deleteRocket = async (req: express.Request, res: express.Response) => {
-    try {
-        return fetch(mountEndpointWithId(Endpoints.rocket, req.params.id), { method: "DELETE" })
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                res.status(200).send(body);
-            })
-    } catch (err) {
-        console.error(err);
+    async updateRocket(id: number, data: Partial<Rocket>) {
+        return RocketRepository.update({ id }, data)
+    },
+
+    async deleteRocket(id: number) {
+        return RocketRepository.delete(id)
     }
-}
+})

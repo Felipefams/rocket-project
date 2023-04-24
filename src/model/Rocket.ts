@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "ty
 import Launch from "./Launch";
 
 @Entity("rocket")
-class Rocket{
+export class Rocket{
     @PrimaryGeneratedColumn()
     id : number; 
 

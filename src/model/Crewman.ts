@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, Pr
 import Crew from "./Crew";
 
 @Entity("crewman")
-class Crewman{
+export class Crewman{
     @PrimaryGeneratedColumn()
     id: number;   
 
@@ -11,10 +11,6 @@ class Crewman{
 
     @Column()
     patent: string;
-
-    @ManyToMany(() => Crew)
-    @JoinTable({name:"crew_crewman"})
-    crew: Crew[];
 
     constructor(name: string, patent: string){
         this.name = name;
