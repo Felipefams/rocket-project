@@ -47,6 +47,7 @@ export const updateLaunch = async (req: express.Request, res: express.Response) 
         const newCrew = await CrewRepository.getCrew(Number(req.body.crew));
     
         const newLaunch = new Launch(launchCode,date, success, newRocket, newCrew);
+        const launch = await launchService.updateLaunch(id, newLaunch);
         return res.json(newLaunch);
     }catch(error){
         console.error(error);

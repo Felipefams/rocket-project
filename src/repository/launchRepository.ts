@@ -3,9 +3,6 @@ import { Endpoints } from '../enums';
 import { mountEndpoint, mountEndpointWithId } from '../utils/stringUtils';
 import AppDataSource from '../data-source';
 import Launch from '../model/Launch';
-import Rocket from '../model/Rocket';
-import { LaunchRequest } from '../../types';
-import { RocketRepository } from './rocketRepository';
 
 export const LaunchRepository = AppDataSource.getRepository(Launch).extend({
 
@@ -22,10 +19,10 @@ export const LaunchRepository = AppDataSource.getRepository(Launch).extend({
     },
 
     async updateLaunch(id: number, launch: Partial<Launch>) {
-        const newLaunch = await LaunchRepository.getLaunch(id);
-        Object.assign(newLaunch, launch);
-        await LaunchRepository.save(newLaunch);
-        // await LaunchRepository.update({ id }, launch);
+        // const newLaunch = await LaunchRepository.getLaunch(id);
+        // Object.assign(newLaunch, launch);
+        // await LaunchRepository.save(newLaunch);
+        await LaunchRepository.update({ id }, launch);
         return await LaunchRepository.getLaunch(id);
     },
 
