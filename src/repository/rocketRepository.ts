@@ -3,7 +3,7 @@ import { Endpoints } from '../enums';
 import { mountEndpoint, mountEndpointWithId } from '../utils/stringUtils';
 import AppDataSource from '../data-source';
 import Rocket from '../model/Rocket';
-import { RocketRequest } from '../../types';
+import { RocketRequest } from '../types';
 
 export const RocketRepository = AppDataSource.getRepository(Rocket).extend({
 

@@ -1,7 +1,7 @@
 import {} from '../repository/crewRepository';
 import Crew from '../model/Crew';
 import { CrewRepository } from '../repository/crewRepository';
-import { CrewRequest } from '../../types';
+import { CrewRequest } from '../types';
 import { Crewman } from '../model/Crewman';
 
 export const getAllCrews = async () => {

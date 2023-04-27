@@ -1,6 +1,6 @@
 import Crew from '../model/Crew';
 import AppDataSource from '../data-source';
-import { CrewRequest } from '../../types';
+import { CrewRequest } from '../types';
 
 export const CrewRepository = AppDataSource.getRepository(Crew).extend({
 
