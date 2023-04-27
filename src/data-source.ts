@@ -8,8 +8,8 @@ const AppDataSource = new DataSource({
     username: "felipe",
     password: "Teste123@",
     // ssl: true, //require_secure_transport OFF
-    entities: [__dirname + "/model/*.ts"],
-    migrations: [__dirname + '/database/migrations/*.ts'],
+    entities: ["./src/model/*.ts"],
+    migrations: ['./src/database/migrations/*.ts'],
 })
 
 AppDataSource.initialize()
