@@ -17,15 +17,18 @@ import AppDataSource from './data-source';
 AppDataSource.initialize()
     .then(() => {
         console.log("Data Source has been initialized!")
+        initializeApp();
     })
     .catch((err) => {
         console.error("Error during Data Source initialization", err)
     })
 
-app.use(express.json())
-app.use("/rocket", rocketApi);
-app.use("/crew", crewApi);
-app.use("/crewman", crewmanApi);
-app.use("/launch", launchApi);
+function initializeApp() {
+    app.use(express.json())
+    app.use("/rocket", rocketApi);
+    app.use("/crew", crewApi);
+    app.use("/crewman", crewmanApi);
+    app.use("/launch", launchApi);
 
-app.listen(PORT, () => console.log(`server running at port ${PORT}`));
+    app.listen(PORT, () => console.log(`server running at port ${PORT}`));
+}

@@ -19,7 +19,7 @@ export const getCrewman = async (id: number) => {
 }
 
 export const updateCrewman = async (id: number, crewman: Partial<Crewman>) => {
-    const crew = CrewmanRepository.updateCrewman(id, crewman);
+    const crew = await CrewmanRepository.updateCrewman(id, crewman);
     if (crew == null || crew == undefined) throw new Error("cant find user with id " + id);
     return crew;
 }
