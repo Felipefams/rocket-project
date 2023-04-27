@@ -5,12 +5,22 @@ import express from 'express';
 // dotenv.config()
 const app = express();
 const PORT = process.env.PORT || 8080;
+
 // const rocketApi = require("../routes/api/rocketApi")
 import rocketApi from "./routes/api/rocketApi"
 import crewApi from "./routes/api/crewApi"
 import crewmanApi from "./routes/api/crewmanApi"
 import launchApi from "./routes/api/launchApi"
+import AppDataSource from './data-source';
 
+
+AppDataSource.initialize()
+    .then(() => {
+        console.log("Data Source has been initialized!")
+    })
+    .catch((err) => {
+        console.error("Error during Data Source initialization", err)
+    })
 
 app.use(express.json())
 app.use("/rocket", rocketApi);
