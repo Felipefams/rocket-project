@@ -8,8 +8,8 @@ const AppDataSource = new DataSource({
     username: "felipe",
     password: "Teste123@",
     // ssl: true, //require_secure_transport OFF
-    entities: ["./src/model/*.ts"],
-    migrations: ['./src/database/migrations/*.ts'],
+    entities: ["./**/model/*.{ts,js}"],
+    migrations: ['./**/database/migrations/*.{ts,js}'],
 })
 
 export default AppDataSource;
