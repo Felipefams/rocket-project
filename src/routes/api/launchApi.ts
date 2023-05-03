@@ -1,5 +1,6 @@
 import express from "express";
-import { getAllLaunchs, updateLaunch, createNewLaunch, deleteLaunch, getLaunch} from "../../controllers/launchController";
+import { getAllLaunchs, updateLaunch, createNewLaunch, deleteLaunch, getLaunch} from "../../controllers/LaunchController";
+
 const router = express.Router();
 
 router.route('/')

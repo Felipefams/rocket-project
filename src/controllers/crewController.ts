@@ -1,7 +1,7 @@
 import express, { response } from 'express';
 import * as crewService from '../service/crewService';
 import Crew from '../model/Crew';
-import { CrewmanRepository } from '../repository/crewmanRepository';
+import { CrewmanRepository } from '../repository/CrewmanRepository';
 import { In } from 'typeorm';
 
 export const getAllCrews = async (req: express.Request, res: express.Response) => {

@@ -1,32 +1,38 @@
 import { Crewman } from "../model/Crewman"
-import { CrewmanRepository } from "../repository/crewmanRepository";
+import { CrewmanRepository } from "../repository/CrewmanRepository";
 
-export const getAllCrewmen = async () => {
-    return CrewmanRepository.getAllCrewmen();
-}
+export class CrewmanService {
+    private readonly CrewmanRepository = new CrewmanRepository;
 
-export const createNewCrewman = async (crewman: Partial<Crewman>) => {
-    return CrewmanRepository.createNewCrewman(crewman);
-}
+    getAllCrewman = async () => {
+        return this.CrewmanRepository.getAll();
+    }
 
-export const getCrewman = async (id: number) => {
-    const crew = await CrewmanRepository.getCrewman(id);
+    createCrewman = async (crewman: Partial<Crewman>) => {
+        return this.CrewmanRepository.create(crewman);
+    }
 
-    //todo melhorar esse tratamento
-    if (crew == null || crew == undefined) throw new Error("cant find user with id " + id);
 
-    return crew;
-}
+    getCrewmanById = async (id: number) => {
+        const crew = await this.CrewmanRepository.getById(id);
 
-export const updateCrewman = async (id: number, crewman: Partial<Crewman>) => {
-    const crew = await CrewmanRepository.updateCrewman(id, crewman);
-    if (crew == null || crew == undefined) throw new Error("cant find user with id " + id);
-    return crew;
-}
+        //todo melhorar esse tratamento
+        if (crew == null || crew == undefined) throw new Error("cant find user with id " + id);
 
-export const deleteCrewman = async (id: number) => {
-    const crew = await CrewmanRepository.getCrewman(id);
-    if (crew == null || crew == undefined) throw new Error("cant find user with id " + id);
+        return crew;
+    }
 
-    return CrewmanRepository.deleteCrewman(id);
+    updateCrewman = async (id: number, crewman: Partial<Crewman>) => {
+        const crew = await this.CrewmanRepository.update(id, crewman);
+        if (crew == null || crew == undefined) throw new Error("cant find user with id " + id);
+        return crew;
+    }
+
+    deleteCrewmanById = async (id: number) => {
+        const crew = await this.CrewmanRepository.getById(id);
+        if (crew == null || crew == undefined) throw new Error("cant find user with id " + id);
+
+        return this.CrewmanRepository.deleteById(id);
+    }
+
 }
