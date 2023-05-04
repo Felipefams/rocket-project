@@ -1,6 +1,6 @@
 import express from 'express';
 import { Crewman } from '../model/Crewman';
-import { CrewmanService } from "../service/CrewmanService";
+import { CrewmanService } from '../service/CrewmanService';
 
 export class CrewmanController {
     private readonly CrewmanService = new CrewmanService();
