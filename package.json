@@ -7,12 +7,14 @@
     "start": "json-server --watch db.json",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "test": "jest --watchAll --no-cache --runInBand --coverage"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.13",
+    "jest": "^29.5.0",
     "typescript": "^5.0.3"
   },
   "dependencies": {
