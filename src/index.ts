@@ -6,11 +6,10 @@ import express from 'express';
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// const rocketApi = require("../routes/api/rocketApi")
-import rocketApi from "./routes/api/rocketApi"
-import crewApi from "./routes/api/crewApi"
-import crewmanApi from "./routes/api/crewmanApi"
-import launchApi from "./routes/api/launchApi"
+import RocketApi from "./routes/api/RocketApi"
+import CrewApi from "./routes/api/CrewApi"
+import CrewmanApi from "./routes/api/CrewmanApi"
+import LaunchApi from "./routes/api/LaunchApi"
 import AppDataSource from './data-source';
 
 
@@ -25,10 +24,10 @@ AppDataSource.initialize()
 
 function initializeApp() {
     app.use(express.json())
-    app.use("/rocket", rocketApi);
-    app.use("/crew", crewApi);
-    app.use("/crewman", crewmanApi);
-    app.use("/launch", launchApi);
+    app.use("/rocket", RocketApi);
+    app.use("/crew", CrewApi);
+    app.use("/crewman", CrewmanApi);
+    app.use("/launch", LaunchApi);
 
     app.listen(PORT, () => console.log(`server running at port ${PORT}`));
 }

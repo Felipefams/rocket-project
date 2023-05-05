@@ -1,15 +1,17 @@
 import express from "express";
-import { getAllLaunchs, updateLaunch, createNewLaunch, deleteLaunch, getLaunch} from "../../controllers/LaunchController";
+import { LaunchService } from "../../service/LaunchService";
+import { LaunchController } from "../../controllers/LaunchController";
 
+const {getAll, create, getById, update, deleteById } = new LaunchController(new LaunchService);
 const router = express.Router();
 
 router.route('/')
-    .get(getAllLaunchs)
-    .post(createNewLaunch)
+    .get(getAll)
+    .post(create)
 
 router.route('/:id')
-    .get(getLaunch)
-    .put(updateLaunch)
-    .delete(deleteLaunch)
+    .get(getById)
+    .put(update)
+    .delete(deleteById)
 
 export default router;

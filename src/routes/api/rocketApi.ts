@@ -1,14 +1,17 @@
 import express from "express";
-import { getAllRockets, updateRocket, createNewRocket, deleteRocket, getRocket} from "../../controllers/rocketController";
+import { RocketController } from "../../controllers/RocketController";
+import { RocketService } from "../../service/RocketService";
+
+const {getAll, create, getById, update, deleteById } = new RocketController(new RocketService);
 const router = express.Router();
 
 router.route('/')
-    .get(getAllRockets)
-    .post(createNewRocket)
+    .get(getAll)
+    .post(create)
 
 router.route('/:id')
-    .get(getRocket)
-    .put(updateRocket)
-    .delete(deleteRocket)
+    .get(getById)
+    .put(update)
+    .delete(deleteById)
 
 export default router;

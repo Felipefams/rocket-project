@@ -1,14 +1,17 @@
 import express from "express";
-import { getAllCrews, updateCrew, createNewCrew, deleteCrew, getCrew} from "../../controllers/crewController";
+import { CrewService } from "../../service/CrewService";
+import { CrewController } from "../../controllers/CrewController";
+
+const {getAll, create, getById, update, deleteById } = new CrewController(new CrewService);
 const router = express.Router();
 
 router.route('/')
-    .get(getAllCrews)
-    .post(createNewCrew)
+    .get(getAll)
+    .post(create)
 
 router.route('/:id')
-    .get(getCrew)
-    .put(updateCrew)
-    .delete(deleteCrew)
+    .get(getById)
+    .put(update)
+    .delete(deleteById)
 
 export default router;

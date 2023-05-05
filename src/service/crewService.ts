@@ -1,25 +1,9 @@
-import {} from '../repository/crewRepository';
+import {} from '../repository/CrewRepository';
 import Crew from '../model/Crew';
-import { CrewRepository } from '../repository/crewRepository';
-import { CrewRequest } from '../types';
-import { Crewman } from '../model/Crewman';
+import { CrewRepository } from '../repository/CrewRepository';
+import { BaseRepository } from '../repository/interfaces/BaseRepository';
+import { BaseService } from './interfaces/BaseService';
 
-export const getAllCrews = async () => {
-    return CrewRepository.getAllCrews();
-}
-
-export const createNewCrew = async (crew : Crew) => {
-    return CrewRepository.createNewCrew(crew); 
-}
-
-export const getCrew = async (id : number) => { 
-    return CrewRepository.getCrew(id); 
-}
-
-export const updateCrew = async (id : number, crew : Partial<Crew>) => {
-    return CrewRepository.updateCrew(id, crew); 
-}
-
-export const deleteCrew = async ({id} : CrewRequest) => {
-    return CrewRepository.deleteCrew(id); 
+export class CrewService extends BaseService<Crew>{
+    protected readonly repository = new CrewRepository();
 }

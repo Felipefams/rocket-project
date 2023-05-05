@@ -1,18 +1,17 @@
 import express from "express";
 import { CrewmanController } from "../../controllers/CrewmanController";
+import { CrewmanService } from "../../service/CrewmanService";
 
-
-const {getAllCrewman, createCrewman, getCrewmanById, updateCrewman, deleteCrewmanById } = new CrewmanController();
-
+const {getAll, create, getById, update, deleteById } = new CrewmanController(new CrewmanService);
 const router = express.Router();
 
 router.route('/')
-    .get(getAllCrewman)
-    .post(createCrewman)
+    .get(getAll)
+    .post(create)
 
 router.route('/:id')
-    .get(getCrewmanById)
-    .put(updateCrewman)
-    .delete(deleteCrewmanById)
+    .get(getById)
+    .put(update)
+    .delete(deleteById)
 
 export default router;
