@@ -1,4 +1,5 @@
-import { DeepPartial, Entity, FindOptions, Repository } from "typeorm"
+import { DeepPartial, Entity, EntityTarget, FindOptions, Repository } from "typeorm"
+import AppDataSource from "../../data-source"
 
 export interface IBaseRepository<T> {
     getAll(): Promise<T[]>
@@ -12,8 +13,8 @@ export interface IBaseRepository<T> {
 export abstract class BaseRepository<T> implements IBaseRepository<T>{
     protected repository: Repository<T>;
 
-    constructor(repository: Repository<T>) {
-        this.repository = repository;
+    constructor(obj: EntityTarget<T>){
+        this.repository = AppDataSource.getRepository(obj);
     }
 
     async getAll(): Promise<T[]> {
@@ -32,7 +33,7 @@ export abstract class BaseRepository<T> implements IBaseRepository<T>{
         return obj;
     }
 
-    async create(obj: DeepPartial<T>): Promise<T>{
+    async create(obj: T | DeepPartial<T>): Promise<T>{
         const newObj = this.repository.create(obj);
         await this.repository.save(newObj);
         return newObj;

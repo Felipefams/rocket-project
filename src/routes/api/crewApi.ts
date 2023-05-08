@@ -1,8 +1,9 @@
 import express from "express";
 import { CrewService } from "../../service/CrewService";
 import { CrewController } from "../../controllers/CrewController";
+import { crewController } from "../../controllerFactory";
 
-const {getAll, create, getById, update, deleteById } = new CrewController(new CrewService);
+const {getAll, create, getById, update, deleteById } = crewController;
 const router = express.Router();
 
 router.route('/')

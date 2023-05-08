@@ -1,5 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import Crew from "./Crew";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("crewman")
 export class Crewman{

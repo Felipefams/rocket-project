@@ -1,8 +1,7 @@
 import express from "express";
-import { RocketController } from "../../controllers/RocketController";
-import { RocketService } from "../../service/RocketService";
+import { rocketController } from "../../controllerFactory";
 
-const {getAll, create, getById, update, deleteById } = new RocketController(new RocketService);
+const {getAll, create, getById, update, deleteById } = rocketController;
 const router = express.Router();
 
 router.route('/')
