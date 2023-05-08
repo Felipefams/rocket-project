@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { BaseService } from "../../service/interfaces/BaseService";
+import { BaseService, IBaseService } from "../../service/interfaces/BaseService";
 
 export abstract class BaseController<T>{
-    protected readonly service: BaseService<T>;
+    protected readonly service: IBaseService<T>;
 
     constructor(service: BaseService<T>) {
         this.service = service;
