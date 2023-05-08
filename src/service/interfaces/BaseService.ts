@@ -1,9 +1,20 @@
 import { DeepPartial } from "typeorm";
 import { BaseRepository, IBaseRepository } from "../../repository/interfaces/BaseRepository";
 
-export abstract class BaseService<T>{
-    protected readonly repository: BaseRepository<T>;
+export interface IBaseService<T> {
+    getAll(): Promise<T[]>;
+    getById(id: number): Promise<T>;
+    deleteById(id: number): Promise<T>;
+    create(obj: DeepPartial<T>): Promise<T>;
+    update(id: number, obj: Partial<T>): Promise<T>;
+}
 
+export abstract class BaseService<T>{
+    protected readonly repository: IBaseRepository<T>;
+
+    constructor(repository: IBaseRepository<T>) {
+        this.repository = repository;
+    }
 
     async getAll(): Promise<T[]> {
         return this.repository.getAll();

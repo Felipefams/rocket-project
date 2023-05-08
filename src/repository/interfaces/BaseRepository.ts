@@ -12,6 +12,10 @@ export interface IBaseRepository<T> {
 export abstract class BaseRepository<T> implements IBaseRepository<T>{
     protected repository: Repository<T>;
 
+    constructor(repository: Repository<T>) {
+        this.repository = repository;
+    }
+
     async getAll(): Promise<T[]> {
         return await this.repository.find();
     }
