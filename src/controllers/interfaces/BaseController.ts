@@ -4,7 +4,7 @@ import { BaseService, IBaseService } from "../../service/interfaces/BaseService"
 export abstract class BaseController<T>{
     protected readonly service: IBaseService<T>;
 
-    constructor(service: BaseService<T>) {
+    constructor(service: IBaseService<T>) {
         this.service = service;
     }
 

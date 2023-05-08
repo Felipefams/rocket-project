@@ -12,6 +12,9 @@ export interface IBaseService<T> {
 export abstract class BaseService<T>{
     protected readonly repository: IBaseRepository<T>;
 
+    constructor(repository: IBaseRepository<T>) {
+        this.repository = repository;
+    }
 
     async getAll(): Promise<T[]> {
         return this.repository.getAll();
