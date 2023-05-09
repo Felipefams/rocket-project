@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { CrewDTO } from "../../dto/CrewDTO";
+import Crew from "../../model/Crew";
 import { BaseService, IBaseService } from "../../service/interfaces/BaseService";
 
 export abstract class BaseController<T>{
@@ -55,4 +57,5 @@ export abstract class BaseController<T>{
             return res.status(404).send(`${err}`);
         }
     }
+
 }

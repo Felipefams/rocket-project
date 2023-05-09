@@ -23,7 +23,6 @@ export abstract class BaseRepository<T> implements IBaseRepository<T>{
 
     async getById(id: number): Promise<T> {
         const obj = await this.repository.findOneBy({id} as any);
-        if(!obj) throw new Error(`${id} does not exist`)
         return obj;
     }
 
@@ -41,7 +40,6 @@ export abstract class BaseRepository<T> implements IBaseRepository<T>{
 
     async update(id: number, obj: Partial<T>): Promise<T> {
         const tmpObj = await this.getById(id);
-        if(!tmpObj) throw new Error(`${id} does not exist`)
         const updatedObj = Object.assign(tmpObj, obj);
         await this.repository.save(updatedObj);
         return updatedObj;    

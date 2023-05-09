@@ -1,6 +1,4 @@
 import express from "express";
-import { LaunchService } from "../../service/LaunchService";
-import { LaunchController } from "../../controllers/LaunchController";
 import { launchController } from "../../controllerFactory";
 
 const {getAll, create, getById, update, deleteById } = launchController;
