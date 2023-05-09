@@ -1,21 +1,25 @@
-# name: my CI workflow
+name: Node.js CI
 
-# on:
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     branches: [ "main" ]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-    
-#     steps:
-# #    - name: setup js env
-#     - uses: actions/checkout@v2
-#     - uses: actions/setup-node@v1
-#       with:
-#         node-version: 12
-#     - run: npm i
-#     - run: npm test
-#     - run: npm run dev
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: yarn jest
