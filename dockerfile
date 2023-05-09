@@ -5,7 +5,7 @@ FROM node:18
 WORKDIR /app
 
 # Copy the package.json and package-lock.json files to the container
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
 # Install dependencies
 RUN yarn install
@@ -20,4 +20,4 @@ RUN yarn build
 EXPOSE 8080
 
 # Start the app
-CMD [ "yarn", "start" ]
+CMD [ "yarn", "dev" ]

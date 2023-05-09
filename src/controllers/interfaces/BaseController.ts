@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
-import { CrewDTO } from "../../dto/CrewDTO";
-import Crew from "../../model/Crew";
-import { BaseService, IBaseService } from "../../service/interfaces/BaseService";
+import { IBaseService } from "../../service/interfaces/BaseService";
 
 export abstract class BaseController<T>{
     protected readonly service: IBaseService<T>;

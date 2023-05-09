@@ -18,5 +18,9 @@ export default {
     "!src/database/**",
     "!src/models/**",
     "!src/repositories/**",
+    "!src/controllers/**",
+    "!src/routes/**",
+    "!src/data-source.ts",
+    "!src/index.ts",
   ],
 };

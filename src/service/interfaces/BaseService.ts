@@ -1,7 +1,5 @@
 import { DeepPartial } from "typeorm";
-import { crewman } from "../../../test/mockEntities";
-import Crew from "../../model/Crew";
-import { BaseRepository, IBaseRepository } from "../../repository/interfaces/BaseRepository";
+import { IBaseRepository } from "../../repository/interfaces/BaseRepository";
 
 export interface IBaseService<T> {
     getAll(): Promise<T[]>;

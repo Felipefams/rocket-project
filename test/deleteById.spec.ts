@@ -25,7 +25,7 @@ describe("All deleteById tests", () => {
 
         const result = await rocketServiceMock.deleteById(rocket.id);
 
-        expect(result).toEqual(rocket);
+        return expect(result).toEqual(rocket);
     });
 
     it("should deleteById a new launch", async () => {
