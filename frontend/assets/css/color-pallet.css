@@ -1,0 +1,13 @@
+:root{
+    /* colors */
+    --black: #272727;
+    --light-grey: #747474;
+    --orange: #E1DABD; 
+    --yellow: #E3B23C;
+    --green: #EDADC7;
+    --blue: #90FCF9;
+    --ivory: #FBFFE1;
+    --blue-button:rgb(37, 99, 235);
+    --green-button: #14a76c;
+    --red-button: rgb(224, 36, 36);
+}

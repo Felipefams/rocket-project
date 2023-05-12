@@ -1,0 +1,60 @@
+@import url("color-pallet.css");
+:root{
+    --default-transition-time: 0.4s;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    /* font-family: "Poppins", sans-serif; */
+}
+
+.nav{
+    display: flex;
+    position: absolute;
+}
+.navbar-list {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--black);;    
+}
+
+.navbar-item{
+    padding: 1rem;
+    border-right: 1px solid var(--light-grey);
+}
+.navbar-item:nth-child(2){
+    margin-left: auto;
+    border-left: 1px solid var(--light-grey);
+}
+
+.navbar-item:hover{ 
+    background-color: var(--light-grey);
+    cursor: pointer;
+    transition: background-color var(--default-transition-time) linear;
+}
+/* navbar color animations */
+.navbar-item:nth-child(1):hover>a{
+    color: white;
+}
+.navbar-item:nth-child(2):hover>a{
+    color: var(--yellow);
+}
+.navbar-item:nth-child(3):hover>a{
+    color: var(--orange);
+}
+.navbar-item:nth-child(4):hover>a{
+    color: var(--green);
+}
+.navbar-item:nth-child(5):hover>a{
+    color: var(--blue);
+}
+
+.navbar-item> a{
+    text-decoration: none;
+    color: var(--light-grey);
+}

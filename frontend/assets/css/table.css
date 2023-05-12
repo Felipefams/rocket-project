@@ -1,0 +1,105 @@
+@import url(color-pallet.css);
+
+#wrap-table-and-button {
+    margin-top: 10%;
+    margin-bottom: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-table {
+    display: table;
+    color: var(--ivory);
+    /* flex-direction: column; */
+    background-color: var(--black);
+}
+
+.add-button-div {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.add-button {
+    background-color:var(--green-button);
+    color: white;
+}
+
+.table-title {
+    background-color: var(--black);
+    color: var(--ivory);
+    padding: 1rem; 
+}
+
+/* 
+todo: enable a media query for the table to be responsive (add overflow-x auto) and remove display flex
+
+*/
+@media only screen and (max-width: 825px) {
+    .table-div {
+        overflow-x: auto;
+        display: unset;
+    }
+}
+
+@media screen and (min-width: 825px) {
+    .table-div {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    /* min-width: 80%; */
+}
+
+thead {
+    background-color: var(--light-grey);
+    display: table-header-group;
+    vertical-align: middle;
+}
+
+th {
+    min-width: 2rem;
+    padding: 0.5rem;
+}
+
+tr {
+    vertical-align: inherit;
+    display: table-row;
+}
+
+td {
+    padding: 0.75rem;
+    background-color: inherit;
+    vertical-align: inherit;
+    display: table-cell;
+}
+
+.td-button {
+    display: flex;
+    justify-content: center;
+    column-gap: 2rem;
+}
+
+.edit-button {
+    background-color: rgb(37, 99, 235);
+    color: white;
+}
+
+.delete-button {
+    background-color: rgb(224, 36, 36);
+    color: white;
+}
+
+.button {
+    width: 9rem;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: #747474 solid;
+    cursor: pointer;
+}

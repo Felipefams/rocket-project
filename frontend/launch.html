@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/table.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="navbar-list">
+            <li class="navbar-item">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="navbar-item">
+                <a href="rocket.html">Rockets</a>
+            </li>
+            <li class="navbar-item">
+                <a href="crewman.html">Crewman</a>
+            </li>
+            <li class="navbar-item">
+                <a href="crew.html">Crews</a>
+            </li>
+            <li class="navbar-item">
+                <a href="launch.html">Launchs</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="wrap-table-and-button">
+        <!-- Table -->
+        <div class="table-div">
+            <table class="main-table">
+                <caption class="table-title">Launch!</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>LaunchCode</th>
+                        <th>Date</th>
+                        <th>Success</th>
+                        <th>Rocket</th>
+                        <th>Crew</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>110977</td>
+                        <td>02/03/2023</td>
+                        <td> Yes! </td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td class="td-button">
+                            <button class="button edit-button" onclick="openModal()">
+                                edit
+                            </button>
+                            <button class="button delete-button">
+                                delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Add Button -->
+        <div class="add-button-div">
+            <button class="button add-button" onclick="openModal()">
+                add
+            </button>
+        </div>
+    </div>
+    <!-- Add Modal -->
+    <div id="add-modal" class="modal">
+        <div class="modal-content">
+            <p class="close" onclick="closeModal()">&times;</p>
+            <h2>Add Crew</h2>
+            <form>
+                <!-- Add input fields here -->
+                <button type="submit" class="button">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div style="display: flex;">
+                <h2>Edit Launch</h2>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="edit-form">
+                <!-- Add input fields here -->
+                <div class="form-group">
+                    <label class="edit-form-label" for="launchcode-input">Launch Code</label>
+                    <input type="text" class="form-input-field" id="launchcode-input" placeholder="Launch Code">
+                </div>
+                <div class="form-group">
+                    <label class="edit-form-label" for="date-input">Date</label>
+                    <input type="date" class="form-input-field" id="date-input" placeholder="Date">
+                </div>
+                <div class="form-group">
+                    <label class="edit-form-label" for="rocket-input">Rocket</label>
+                    <input type="text" class="form-input-field" id="rocket-input" placeholder="Rocket">
+                </div>
+                <div class="form-group">
+                    <label class="edit-form-label" for="crew-input">Crew</label>
+                    <input type="text" class="form-input-field" id="crew-input" placeholder="Crew">
+                </div>
+                <div class="form-group">
+                    <label class="edit-form-label" for="success-input">Success</label>
+                    <input type="checkbox" class="form-input-field" id="success-input" placeholder="Success">
+                </div>
+                <button type="button" class="button" id="edit-save-button" onclick="saveInfo()">Save</button>
+            </form>
+
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+        </div>
+        <ul class="social-icon">
+            <li class="social-icon__item"><a class="social-icon__link" href="#">
+                    <ion-icon name="logo-github"></ion-icon>
+                </a></li>
+            <li class="social-icon__item"><a class="social-icon__link" href="#">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                </a></li>
+            <li class="social-icon__item"><a class="social-icon__link" href="#">
+                    <ion-icon name="logo-google"></ion-icon>
+                </a></li>
+        </ul>
+        <ul class="menu">
+            <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
+            <li class="menu__item"><a class="menu__link" href="#">About</a></li>
+            <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
+            <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
+            <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+
+        </ul>
+        <p>&copy;2023 Felipe Morais | All Rights Reserved</p>
+    </footer>
+    <script src="crew.js"></script>
+    <script src="edit-modal.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+
+</html>

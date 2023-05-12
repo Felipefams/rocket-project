@@ -10,6 +10,7 @@ import CrewApi from "./routes/api/CrewApi"
 import CrewmanApi from "./routes/api/CrewmanApi"
 import LaunchApi from "./routes/api/LaunchApi"
 import AppDataSource from './data-source';
+import { corsConfig } from './config/cors-config';
 
 Sentry.init({
     dsn: "https://22f456971be1441e81d6f3f1edab3f16@o4505092894031872.ingest.sentry.io/4505092906942464",
@@ -31,6 +32,7 @@ AppDataSource.initialize()
     })
 
 function initializeApp() {
+    app.use(corsConfig);
     app.use(express.json())
     app.use("/rocket", RocketApi);
     app.use("/crew", CrewApi);
