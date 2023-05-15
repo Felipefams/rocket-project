@@ -8,16 +8,15 @@ const closeButtons = document.querySelectorAll(".close");
 const editSaveButton = document.getElementById("edit-save-button");
 const editForm = document.getElementById("edit-form");
 
-
-editButton.onclick = function () {
-    editModal.style.display = "flex";
-};
+editButton.addEventListener("click", () => {
+    editModal.style.display = "flex"; 
+});
 
 // When the user clicks on <span> (x), close the modal
 closeButtons.forEach((button) => {
-    button.onclick = function () {
+    button.addEventListener("click", () => {
         editModal.style.display = "none";
-    };
+    });
 });
 
 const saveInfo = editSaveButton.onclick = async (endpoint) => {

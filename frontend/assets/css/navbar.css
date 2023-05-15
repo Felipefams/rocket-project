@@ -58,3 +58,14 @@ body{
     text-decoration: none;
     color: var(--light-grey);
 }
+
+@media only screen and (max-width: 470px) {
+    .navbar-list{
+        flex-direction: column;
+    }
+    .navbar-item:nth-child(2){
+        margin-left: 0;
+        border-left: none;
+    }
+
+}

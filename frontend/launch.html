@@ -58,7 +58,7 @@
                         <td>1</td>
                         <td>2</td>
                         <td class="td-button">
-                            <button class="button edit-button" onclick="openModal()">
+                            <button class="button edit-button">
                                 edit
                             </button>
                             <button class="button delete-button">
@@ -71,7 +71,7 @@
         </div>
         <!-- Add Button -->
         <div class="add-button-div">
-            <button class="button add-button" onclick="openModal()">
+            <button class="button add-button">
                 add
             </button>
         </div>
@@ -79,12 +79,35 @@
     <!-- Add Modal -->
     <div id="add-modal" class="modal">
         <div class="modal-content">
-            <p class="close" onclick="closeModal()">&times;</p>
-            <h2>Add Crew</h2>
-            <form>
+            <div style="display: flex;">
+                <h2>Add Launch</h2>
+                <button class="close">&times;</button>
+            </div>
+            <form id="add-form">
                 <!-- Add input fields here -->
-                <button type="submit" class="button">Add</button>
+                <div class="form-group">
+                    <label class="add-form-label" for="launchcode-input">Launch Code</label>
+                    <input type="text" class="form-input-field" id="launchcode-input" placeholder="Launch Code">
+                </div>
+                <div class="form-group">
+                    <label class="add-form-label" for="date-input">Date</label>
+                    <input type="date" class="form-input-field" id="date-input" placeholder="Date">
+                </div>
+                <div class="form-group">
+                    <label class="add-form-label" for="rocket-input">Rocket</label>
+                    <input type="text" class="form-input-field" id="rocket-input" placeholder="Rocket">
+                </div>
+                <div class="form-group">
+                    <label class="add-form-label" for="crew-input">Crew</label>
+                    <input type="text" class="form-input-field" id="crew-input" placeholder="Crew">
+                </div>
+                <div class="form-group">
+                    <label class="add-form-label" for="success-input">Success</label>
+                    <input type="checkbox" class="form-input-field" id="success-input" placeholder="Success">
+                </div>
+                <button type="button" class="button" id="add-save-button" onclick="saveInfo()">Save</button>
             </form>
+
         </div>
     </div>
 
@@ -93,7 +116,7 @@
         <div class="modal-content">
             <div style="display: flex;">
                 <h2>Edit Launch</h2>
-                <button class="close" onclick="closeModal()">&times;</button>
+                <button class="close">&times;</button>
             </div>
             <form id="edit-form">
                 <!-- Add input fields here -->
@@ -150,8 +173,8 @@
         </ul>
         <p>&copy;2023 Felipe Morais | All Rights Reserved</p>
     </footer>
-    <script src="crew.js"></script>
     <script src="edit-modal.js"></script>
+    <script src="add-modal.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
