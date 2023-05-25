@@ -6,6 +6,6 @@ export interface Launch {
     launchCode?: number;
     date?: string;
     success?: boolean;
-    rocket?: Rocket | number[];
-    crew?: Crew | number[];
+    rocket?: number;
+    crew?: number;
 }

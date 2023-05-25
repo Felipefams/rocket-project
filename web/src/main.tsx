@@ -30,25 +30,30 @@ const launchObj: Launch[] = [
     launchCode: 1200,
     date: "2021-01-01",
     success: true,
-    rocket: [],
-    crew: [],
+    rocket: 1,
+    crew: 2,
     id: 13
   },
   {
     launchCode: 1200,
     date: "2021-01-01",
     success: true,
-    rocket: [],
-    crew: [],
+    rocket: 1,
+    crew: 2,
     id: 13
   }
 ]
 const crewObj: Crew[] = [
   {
-    "name": "Crew 1",
-    "crewman": [],
-    "id": 2
-  }
+    name: "Crew 1",
+    crewman: [1, 3, 4],
+    id: 2
+  },
+  {
+    name: "appollo iv",
+    crewman: [1, 2],
+    id: 14
+  },
 ];
 
 const router = createBrowserRouter([
@@ -58,11 +63,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'launchs',
-        element: <LaunchComponent object={[{}]} />,
+        element: <LaunchComponent object={launchObj} />,
       },
       {
         path: 'crewman',
-        element: <CrewmanComponent object={[{id: 1, name:"teste", patent: "uwu"}]} />,
+        element: <CrewmanComponent object={[{ id: 1, name: "teste", patent: "uwu" }]} />,
       },
       {
         path: 'rockets',

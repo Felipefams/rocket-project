@@ -10,7 +10,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -51,7 +51,13 @@
     margin-bottom: 0.2rem;
 }
 
-.form-group>input {
+.form-group>.checkbox {
+    max-width: 10%;
+    height: 2rem;
+    width: -webkit-fill-available;
+}
+
+.form-group>.form-input-field {
     max-width: 50%;
     width: -webkit-fill-available;
     padding: 0.2rem 1rem 0.2rem 0.5rem;

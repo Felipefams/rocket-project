@@ -21,8 +21,6 @@ function NavItem(props: { text: string, color: string }) {
 export function Navbar() {
     const [on, setOn] = React.useState(true);
 
-
-
     function handle() {
         setOn(!on);
     }
@@ -31,8 +29,6 @@ export function Navbar() {
         <nav className="border-gray-200 dark:bg-myBlack">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link to="/" className="flex items-center">
-
-                    {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" /> */}
                     <RocketSVG fill="blue" className="icon flat-line h-10 mr-3}" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Home</span>
                 </Link>

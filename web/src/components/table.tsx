@@ -1,8 +1,12 @@
-import React, { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { Crudable } from "../types";
 import { AddButton, DeleteButton, EditButton } from "./tableButtons";
-import { CrewmanModal, RocketModal } from "./modal";
+import { CrewModal, CrewmanModal, LaunchModal, RocketModal } from "./modal";
+import { useModal } from "./hooks/useModal";
 import { Rocket } from "../interfaces/rocket";
+import { Crew } from "../interfaces/crew";
+import { Crewman } from "../interfaces/crewman";
+import { Launch } from "../interfaces/launch";
 
 function TBody(props: { object: Crudable, handle: () => void, setModalNumber: (id: number) => void }) {
 
@@ -29,58 +33,98 @@ function TBody(props: { object: Crudable, handle: () => void, setModalNumber: (i
     )
 }
 
-export function Table(props: { data: Crudable, name: string, keys: string[], instance: string}) {
-    const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
-    const [currentOpenModal, setCurrentOpenModal] = useState<number>(0);
+function THead(props: { keys: string[] }) {
+    return (
+        <thead>
+            <tr>
+                {props.keys.map((item, index) => <th key={index}>{item}</th>)}
+                <th></th>
+            </tr>
+        </thead>
+    );
+}
 
-    const setModalNumber = (id: number) => setCurrentOpenModal(id);
+export function Table(props: { name: string, handle: () => void, children: ReactNode }) {
+    return (
+        <div id="wrap-table-and-button">
+            <div className="table-div">
+                <table className="main-table">
+                    <caption className="table-title">{props.name}</caption>
+                    {props.children}
+                </table>
+            </div>
+            <AddButton handle={props.handle} />
+        </div>
+    );
+}
 
-    const openAddModal = () => setIsAddModalOpen(true);
-    const closeAddModal = () => setIsAddModalOpen(false);
+export function RocketTable(props: { data: Rocket[] }) {
+    const { isOpen: isAddModalOpen, openModal: openAddModal, closeModal: closeAddModal, currentModal } = useModal();
+    const { isOpen: isEditModalOpen, openModal: openEditModal, closeModal: closeEditModal, setModalNumber } = useModal();
 
-    const openEditModal = () => setIsEditModalOpen(true);
-    const closeEditModal = () => setIsEditModalOpen(false); 
-
-    let ModalType;
-    switch(props.instance){
-        case "rocket":
-            ModalType = RocketModal;
-            break;
-        case "crew":
-            ModalType = CrewModal;
-            break;
-        case "crewman":
-            ModalType = CrewmanModal;
-            break;
-        case "launch":
-            ModalType = LaunchModal;
-            break;
-    }
+    const keys = Object.keys(props.data[0]);
 
     return (
         <>
-            <div id="wrap-table-and-button">
-                <div className="table-div">
-                    <table className="main-table">
-                        <caption className="table-title">{props.name}</caption>
-                        <thead>
-                            <tr>
-                                {props.keys.map((item, index) => <th key={index}>{item}</th>)}
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <TBody object={props.data} handle={openEditModal} setModalNumber={setModalNumber} />
-                    </table>
-                </div>
-                <AddButton handle={openAddModal} />
-            </div>
-            {isAddModalOpen && <ModalType closeModal={closeAddModal} keys={props.keys} object={{}} isEditModal={false}/>}
-            {isEditModalOpen && <ModalType closeModal={closeEditModal} keys={props.keys} object={props.data[currentOpenModal]} isEditModal={true}/>}
+            <Table handle={openAddModal} name={"Rocket!"}>
+                <THead keys={keys} />
+                <TBody object={props.data} handle={openEditModal} setModalNumber={setModalNumber} />
+            </Table>
+            {isAddModalOpen && <RocketModal closeModal={closeAddModal} keys={keys} object={{}} isEditModal={false} />}
+            {isEditModalOpen && <RocketModal closeModal={closeEditModal} keys={keys} object={props.data[currentModal]} isEditModal={true} />}
         </>
-    )
+    );
+}
+export function CrewTable(props: { data: Crew[] }) {
+    const { isOpen: isAddModalOpen, openModal: openAddModal, closeModal: closeAddModal, currentModal } = useModal();
+    const { isOpen: isEditModalOpen, openModal: openEditModal, closeModal: closeEditModal, setModalNumber } = useModal();
+
+    const keys = Object.keys(props.data[0]);
+
+    return (
+        <>
+            <Table handle={openAddModal} name={"Crew!"}>
+                <THead keys={keys} />
+                <TBody object={props.data} handle={openEditModal} setModalNumber={setModalNumber} />
+            </Table>
+            {isAddModalOpen && <CrewModal closeModal={closeAddModal} keys={keys} object={{}} isEditModal={false} />}
+            {isEditModalOpen && <CrewModal closeModal={closeEditModal} keys={keys} object={props.data[currentModal]} isEditModal={true} />}
+        </>
+    );
 }
 
-// export function RocketTable(props: { data: Rocket[], keys: string[]}) {
+export function CrewmanTable(props: { data: Crewman[] }) {
+    const { isOpen: isAddModalOpen, openModal: openAddModal, closeModal: closeAddModal, currentModal } = useModal();
+    const { isOpen: isEditModalOpen, openModal: openEditModal, closeModal: closeEditModal, setModalNumber } = useModal();
 
-// }
+    const keys = Object.keys(props.data[0]);
+
+    return (
+        <>
+            <Table handle={openAddModal} name={"Crewman!"}>
+                <THead keys={keys} />
+                <TBody object={props.data} handle={openEditModal} setModalNumber={setModalNumber} />
+            </Table>
+            {isAddModalOpen && <CrewmanModal closeModal={closeAddModal} keys={keys} object={{}} isEditModal={false} />}
+            {isEditModalOpen && <CrewmanModal closeModal={closeEditModal} keys={keys} object={props.data[currentModal]} isEditModal={true} />}
+        </>
+    );
+
+}
+export function LaunchTable(props: { data: Launch[] }) {
+    const { isOpen: isAddModalOpen, openModal: openAddModal, closeModal: closeAddModal, currentModal } = useModal();
+    const { isOpen: isEditModalOpen, openModal: openEditModal, closeModal: closeEditModal, setModalNumber } = useModal();
+
+    const keys = Object.keys(props.data[0]);
+
+    return (
+        <>
+            <Table handle={openAddModal} name={"Launch!"}>
+                <THead keys={keys} />
+                <TBody object={props.data} handle={openEditModal} setModalNumber={setModalNumber} />
+            </Table>
+            {isAddModalOpen && <LaunchModal closeModal={closeAddModal} keys={keys} object={{}} isEditModal={false} />}
+            {isEditModalOpen && <LaunchModal closeModal={closeEditModal} keys={keys} object={props.data[currentModal]} isEditModal={true} />}
+        </>
+    );
+}
