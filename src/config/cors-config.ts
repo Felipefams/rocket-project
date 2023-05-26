@@ -1,6 +1,6 @@
 import cors from "cors";
 
-const corsWhiteList = ['https://www.google.com', 'null', 'http://localhost:5500', "http://127.0.0.1:5500"];
+const corsWhiteList = ['https://www.google.com', 'null', 'http://localhost:5500', "http://127.0.0.1:5500", 'http://localhost:5173'];
 
 const corsOptions: cors.CorsOptions = {
     origin: (origin, callback) => {

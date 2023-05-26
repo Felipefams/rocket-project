@@ -25,5 +25,5 @@ export class CrewController extends BaseController<Crew>{
         } catch (err) {
             return res.status(500).send(`${err}`);
         }
-    }
+    } 
 }
