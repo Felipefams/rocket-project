@@ -4,6 +4,8 @@ import { Rocket } from "../interfaces/rocket";
 import { Crewman } from "../interfaces/crewman";
 import { Launch } from "../interfaces/launch";
 import { Crew } from "../interfaces/crew";
+import { strToArr } from "../utils/string";
+import { createCrew, updateCrew } from "../api/crewApi";
 
 function FormInput(props: {
     type: string,
@@ -27,7 +29,7 @@ function FormInput(props: {
                 {...checkedExists && { checked: props.checked }}
                 {...!checkedExists && { value: props.value }}
                 onChange={props.onChange}
-                 />
+            />
         </div>
     );
 }
@@ -138,11 +140,14 @@ export function CrewModal(props: { closeModal: () => void, keys: string[], objec
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
+        const nv = name === "crewman" ? strToArr(value) : value;
+        setFormData({ ...formData, [name]: nv });
     }
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        if(props.isEditModal) updateCrew(formData);
+        else createCrew(formData);
         console.log(formData);
     }
 

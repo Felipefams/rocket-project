@@ -1,6 +1,6 @@
 import { Footer } from "./components/footer";
 import { Navbar } from "./components/navbar"
-import { Table } from "./components/table";
+import { Table } from "./components/table/table";
 import { Launch } from "./interfaces/launch";
 import { Rocket } from "./interfaces/rocket";
 import { Crew } from "./interfaces/crew";

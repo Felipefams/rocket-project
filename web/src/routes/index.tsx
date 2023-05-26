@@ -1,37 +1,86 @@
-import { CrewTable, CrewmanTable, LaunchTable, RocketTable} from "../components/table";
+import { CrewTable, CrewmanTable, LaunchTable, RocketTable } from "../components/table/table";
 import { Crew } from "../interfaces/crew";
 import { Launch } from "../interfaces/launch";
 import { Crewman } from "../interfaces/crewman";
 import { Rocket } from "../interfaces/rocket";
+import { useEffect, useState } from "react";
+import { getAllCrew } from "../api/crewApi";
+import { getAllCrewman } from "../api/crewmanApi";
+import { getAllRockets } from "../api/rocketApi";
+import { getAllLaunch } from "../api/launchApi";
 
 
-export function CrewComponent(props: { object: Crew[] }) {
+export function CrewComponent() {
+
+  const [data, setData] = useState<Crew[]>([]);
+
+  useEffect(() => {
+    getAllCrew()
+      .then(data => setData(data ?? []));
+  }, []); // Empty dependency array to ensure the effect runs only once
+  if (!data || data.length === 0) {
+    return <div>Loading...</div>; // Render a loading state if data is not available yet
+  }
+
   return (
     <>
-      <CrewTable data={props.object}/>
+      <CrewTable data={data} />
     </>
   )
 }
 
-export function RocketComponent(props: { object: Rocket[] }) {
+export function RocketComponent() {
+  const [data, setData] = useState<Rocket[]>([]);
+
+  useEffect(() => {
+    getAllRockets()
+      .then(data => setData(data ?? []));
+  }, []); // Empty dependency array to ensure the effect runs only once
+
+  if (!data || data.length === 0) {
+    return <div>Loading...</div>; // Render a loading state if data is not available yet
+  }
+
   return (
     <>
-      <RocketTable data={props.object} />
+      <RocketTable data={data} />
     </>
   )
 }
 
-export function CrewmanComponent(props: { object: Crewman[] }) {
+export function CrewmanComponent() {
+  const [data, setData] = useState<Crewman[]>([]);
+
+  useEffect(() => {
+    getAllCrewman()
+      .then(data => setData(data ?? []));
+  }, []); // Empty dependency array to ensure the effect runs only once
+
+  if (!data || data.length === 0) {
+    return <div>Loading...</div>; // Render a loading state if data is not available yet
+  }
   return (
     <>
-      <CrewmanTable data={props.object}/>
+      <CrewmanTable data={data} />
     </>
   )
 }
-export function LaunchComponent(props: { object: Launch[] }) {
+
+export function LaunchComponent() {
+  const [data, setData] = useState<Launch[]>([]);
+
+  useEffect(() => {
+    getAllLaunch()
+      .then(data => setData(data ?? []));
+  }, []); // Empty dependency array to ensure the effect runs only once
+
+  if (!data || data.length === 0) {
+    return <div>Loading...</div>; // Render a loading state if data is not available yet
+  }
+
   return (
     <>
-      <LaunchTable data={props.object}/>
+      <LaunchTable data={data} />
     </>
   )
 }

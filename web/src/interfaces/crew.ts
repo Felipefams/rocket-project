@@ -1,6 +1,7 @@
+import { Crewman } from "./crewman";
 
 export interface Crew{
     id?: number;
     name?: string;
-    crewman?: number[]; 
+    crewman?: Crewman[] | number[]; 
 }
