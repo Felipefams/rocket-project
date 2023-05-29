@@ -23,7 +23,7 @@ export abstract class BaseController<T>{
             const obj = await this.service.getById(id);
             return res.json(obj);
         } catch (err) {
-            return res.status(404).send(`${err}`);
+            return res.status(500).send(`${err}`);
         }
     }
 
