@@ -2,10 +2,10 @@
 
 import { useEffect } from "react";
 import { deleteCrew } from "../api/crewApi";
+import { deleteLaunch } from "../api/launchApi";
+import { deleteRocket } from "../api/rocketApi";
+import { deleteCrewman } from "../api/crewmanApi";
 
-function handle() {
-    return alert("This feature is not yet implemented.");
-}
 
 export function AddButton(props: { handle: () => void , setIsEdit: (isEdit: boolean) => void}) {
     function handleBoth() {
@@ -40,8 +40,15 @@ export function DeleteButton(props: { id: number, type: string}) {
     function deleteItem() {
         if(props.type === "crew")
             deleteCrew(props.id);
-        // else if(props.type === "rocket")
-        // else if(props.type === "crewman")
+        else if(props.type === "launch")
+            deleteLaunch(props.id);
+        else if(props.type === "rocket")
+            deleteRocket(props.id);
+        else if(props.type === "crewman")
+            deleteCrewman(props.id);
+        else
+            throw new Error("Invalid type");
+        
     }
 
     return (

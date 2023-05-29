@@ -1,10 +1,10 @@
 import React from "react";
-import { darkHover, mdDarkHover, mdHover } from "../assets/colors";
+import { colors, darkHover, mdDarkHover, mdHover } from "../assets/colors";
 import { RocketSVG } from "./rocket-svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 //todo change a tag to Link
-function NavItem(props: { text: string, color: string }) { 
+function NavItem(props: { text: string, color: string }) {
     return (
         <li>
             <Link to={props.text.toLowerCase()} className={`block py-2 pl-3 pr-4 text-gray-900 
@@ -18,8 +18,19 @@ function NavItem(props: { text: string, color: string }) {
     )
 }
 
+function getPathColor(path: string): string {
+    if (path === "/rockets") return colors["myRed"];
+    else if (path == "/crewman") return colors["myPink"];
+    else if (path === "/crews") return colors["myOrange"];
+    else if (path === "/launchs") return colors["myBlue"];
+
+    return colors["myIvory"];
+}
+
 export function Navbar() {
     const [on, setOn] = React.useState(true);
+    const router = useLocation();
+    const color = getPathColor(router.pathname.toString()); 
 
     function handle() {
         setOn(!on);
@@ -29,7 +40,7 @@ export function Navbar() {
         <nav className="border-gray-200 dark:bg-myBlack">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link to="/" className="flex items-center">
-                    <RocketSVG fill="blue" className="icon flat-line h-10 mr-3}" />
+                    <RocketSVG fill={color} className="icon flat-line h-10 mr-3}" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Home</span>
                 </Link>
                 <button onClick={handle} data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">

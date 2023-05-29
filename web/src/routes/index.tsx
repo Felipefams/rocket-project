@@ -1,4 +1,4 @@
-import { CrewTable, CrewmanTable, LaunchTable, RocketTable } from "../components/table/table";
+// import { CrewTable, CrewmanTable, LaunchTable, RocketTable } from "../components/table/table";
 import { Crew } from "../interfaces/crew";
 import { Launch } from "../interfaces/launch";
 import { Crewman } from "../interfaces/crewman";
@@ -8,6 +8,10 @@ import { getAllCrew } from "../api/crewApi";
 import { getAllCrewman } from "../api/crewmanApi";
 import { getAllRockets } from "../api/rocketApi";
 import { getAllLaunch } from "../api/launchApi";
+import { CrewTable } from "../components/table/crewTable";
+import { CrewmanTable } from "../components/table/crewmanTable";
+import { LaunchTable } from "../components/table/launchTable";
+import { RocketTable } from "../components/table/rocketTable";
 
 
 export function CrewComponent() {
@@ -17,7 +21,7 @@ export function CrewComponent() {
   useEffect(() => {
     getAllCrew()
       .then(data => setData(data ?? []));
-  }, []); // Empty dependency array to ensure the effect runs only once
+  }, [data]); // Empty dependency array to ensure the effect runs only once
   if (!data || data.length === 0) {
     return <div>Loading...</div>; // Render a loading state if data is not available yet
   }
@@ -35,7 +39,7 @@ export function RocketComponent() {
   useEffect(() => {
     getAllRockets()
       .then(data => setData(data ?? []));
-  }, []); // Empty dependency array to ensure the effect runs only once
+  }, [data]); // Empty dependency array to ensure the effect runs only once
 
   if (!data || data.length === 0) {
     return <div>Loading...</div>; // Render a loading state if data is not available yet
@@ -54,7 +58,7 @@ export function CrewmanComponent() {
   useEffect(() => {
     getAllCrewman()
       .then(data => setData(data ?? []));
-  }, []); // Empty dependency array to ensure the effect runs only once
+  }, [data]); // Empty dependency array to ensure the effect runs only once
 
   if (!data || data.length === 0) {
     return <div>Loading...</div>; // Render a loading state if data is not available yet
@@ -72,7 +76,7 @@ export function LaunchComponent() {
   useEffect(() => {
     getAllLaunch()
       .then(data => setData(data ?? []));
-  }, []); // Empty dependency array to ensure the effect runs only once
+  }, [data]); // Empty dependency array to ensure the effect runs only once
 
   if (!data || data.length === 0) {
     return <div>Loading...</div>; // Render a loading state if data is not available yet

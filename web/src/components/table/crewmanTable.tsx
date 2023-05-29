@@ -1,0 +1,20 @@
+import { Crewman } from "../../interfaces/crewman";
+import { useModal } from "../hooks/useModal";
+import { CrewmanModal } from "../modal/crewmanModal";
+import { THead, TBody, Table } from "./table";
+
+export function CrewmanTable(props: { data: Crewman[] }) {
+    const { isOpen: isModalOpen, openModal, closeModal, currentModal, setModalNumber, setEditModal, isEditModal } = useModal();
+
+    const keys = Object.keys(props.data[0]);
+    const data = isEditModal ? props.data[currentModal] : {};
+    return (
+        <>
+            <Table handle={openModal} name={"Crewman!"} setIsEdit={setEditModal}>
+                <THead keys={keys} />
+                <TBody type="crewman" object={props.data} handle={openModal} setModalNumber={setModalNumber} setIsEdit={setEditModal} />
+            </Table>
+            {isModalOpen && <CrewmanModal closeModal={closeModal} keys={keys} object={data} isEditModal={isEditModal} />}
+        </>
+    );
+}

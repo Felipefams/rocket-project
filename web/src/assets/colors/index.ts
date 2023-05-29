@@ -7,6 +7,17 @@
 // export const mdHover = (color: string) => {
 //     return `md:hover:text-${color}`;
 // }
+export const colors: Record<string, string> = {
+    'myBlack': '#272727',
+    'myYellow': '#E1DABD',
+    'myOrange': '#E3B23C',
+    'myPink': '#EDADC7',
+    'myBlue': '#90FCF9',
+    'myIvory': '#FBFFE1',
+    'myRed': '#6A041D',
+    'myLightGray': '#747474',
+}
+
 export const darkHover: Record<string, string> = {
     myYellow: `dark:hover:text-myYellow`,
     myPink: `dark:hover:text-myPink`,

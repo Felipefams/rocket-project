@@ -1,6 +1,8 @@
 export const RocketSVG = (props: {fill: string, className: string}) => (
     <svg
-        fill="#000000"
+        fill={props.fill}
+        stroke="#747474"
+        strokeWidth={1}
         viewBox="0 0 24 24"
         id="rocket"
         data-name="Flat Line"
@@ -13,18 +15,14 @@ export const RocketSVG = (props: {fill: string, className: string}) => (
             d="M15.87,18C16.74,8,14,4.36,12.65,3.24a1,1,0,0,0-1.3,0C10,4.36,7.26,8,8.13,18Z"
             style={{
                 fill: props.fill,
-                strokeWidth: 2,
             }}
         />
         <path
             id="primary"
             d="M15.87,11A5.89,5.89,0,0,1,20,17H16"
             style={{
-                fill: "none",
-                stroke: "rgb(0, 0, 0)",
                 strokeLinecap: "round",
                 strokeLinejoin: "round",
-                strokeWidth: 2,
             }}
         />
         <path
@@ -32,11 +30,8 @@ export const RocketSVG = (props: {fill: string, className: string}) => (
             data-name="primary"
             d="M8.13,11A5.89,5.89,0,0,0,4,17H8"
             style={{
-                fill: "none",
-                stroke: "rgb(0, 0, 0)",
                 strokeLinecap: "round",
                 strokeLinejoin: "round",
-                strokeWidth: 2,
             }}
         />
         <path
@@ -44,11 +39,8 @@ export const RocketSVG = (props: {fill: string, className: string}) => (
             data-name="primary"
             d="M15,20V18H9v2a1,1,0,0,0,1,1h4A1,1,0,0,0,15,20Zm.87-2C16.74,8,14,4.36,12.65,3.24a1,1,0,0,0-1.3,0C10,4.36,7.26,8,8.13,18Z"
             style={{
-                fill: "none",
-                stroke: "rgb(0, 0, 0)",
                 strokeLinecap: "round",
                 strokeLinejoin: "round",
-                strokeWidth: 2,
             }}
         />
     </svg>
