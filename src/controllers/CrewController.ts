@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import Crew from "../model/Crew";
 import { BaseController } from "./interfaces/BaseController";
-import { CrewmanController } from "./CrewmanController";
-import { crewService, crewmanController, crewmanService } from "../controllerFactory";
+import { crewService, crewmanService } from "../controllerFactory";
 
 export class CrewController extends BaseController<Crew>{
     override create = async (req: Request, res: Response) => {
@@ -13,7 +12,7 @@ export class CrewController extends BaseController<Crew>{
                 for (let i = 0; i < req.body.crewman.length; i++) {
                     const tmpCrewman = await crewmanService.getById(req.body.crewman[i]);
                     if (!tmpCrewman) {
-                        return res.status(404).send(`Crewman with id ${req.body.crewman[i]} not found`);
+                        return res.status(400).send(`Crewman with id ${req.body.crewman[i]} not found`);
                     }
                     replaceCrewman.push(tmpCrewman);
                 }
@@ -34,7 +33,7 @@ export class CrewController extends BaseController<Crew>{
                 for (let i = 0; i < req.body.crewman.length; i++) {
                     const tmpCrewman = await crewmanService.getById(req.body.crewman[i]);
                     if (!tmpCrewman) {
-                        return res.status(404).send(`Crewman with id ${req.body.crewman[i]} not found`);
+                        return res.status(400).send(`Crewman with id ${req.body.crewman[i]} not found`);
                     }
                     replaceCrewman.push(tmpCrewman);
                 }

@@ -6,17 +6,17 @@ import { BaseController } from "./interfaces/BaseController";
 export class LaunchController extends BaseController<Launch>{
     override create = async (req: Request, res: Response) => {
         try {
-            let crew= req.body.crew;
+            let crew = req.body.crew;
             let rocket = req.body.rocket;
-            if(typeof crew === 'number' ) {
+            if (typeof crew === 'number') {
                 crew = await crewService.getById(crew);
-                if (!crew){
+                if (!crew) {
                     return res.status(400).send(`Crew with id ${req.body.crew} not found`);
                 }
             }
-            if(typeof rocket === 'number' ) {
+            if (typeof rocket === 'number') {
                 rocket = await rocketService.getById(rocket);
-                if (!rocket){
+                if (!rocket) {
                     return res.status(400).send(`Rocket with id ${req.body.rocket} not found`);
                 }
             }
@@ -36,17 +36,17 @@ export class LaunchController extends BaseController<Launch>{
     }
     override update = async (req: Request, res: Response) => {
         try {
-            let crew= req.body.crew;
+            let crew = req.body.crew;
             let rocket = req.body.rocket;
-            if(typeof crew === 'number' ) {
+            if (typeof crew === 'number') {
                 crew = await crewService.getById(crew);
-                if (!crew){
+                if (!crew) {
                     return res.status(400).send(`Crew with id ${req.body.crew} not found`);
                 }
             }
-            if(typeof rocket === 'number' ) {
+            if (typeof rocket === 'number') {
                 rocket = await rocketService.getById(rocket);
-                if (!rocket){
+                if (!rocket) {
                     return res.status(400).send(`Rocket with id ${req.body.rocket} not found`);
                 }
             }
