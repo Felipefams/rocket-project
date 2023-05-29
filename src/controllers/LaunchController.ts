@@ -6,18 +6,18 @@ import { BaseController } from "./interfaces/BaseController";
 export class LaunchController extends BaseController<Launch>{
     override create = async (req: Request, res: Response) => {
         try {
-            let crew = req.body.crew;
+            let crew= req.body.crew;
             let rocket = req.body.rocket;
             if(typeof crew === 'number' ) {
                 crew = await crewService.getById(crew);
                 if (!crew){
-                    return res.status(404).send(`Crew with id ${req.body.crew} not found`);
+                    return res.status(400).send(`Crew with id ${req.body.crew} not found`);
                 }
             }
             if(typeof rocket === 'number' ) {
                 rocket = await rocketService.getById(rocket);
                 if (!rocket){
-                    return res.status(404).send(`Rocket with id ${req.body.rocket} not found`);
+                    return res.status(400).send(`Rocket with id ${req.body.rocket} not found`);
                 }
             }
             const newLaunch = new Launch(
@@ -30,6 +30,37 @@ export class LaunchController extends BaseController<Launch>{
             const obj = await launchService.create(newLaunch);
             return res.json(obj);
         } catch (err) {
+            console.log(err);
+            return res.status(500).send(`${err}`);
+        }
+    }
+    override update = async (req: Request, res: Response) => {
+        try {
+            let crew= req.body.crew;
+            let rocket = req.body.rocket;
+            if(typeof crew === 'number' ) {
+                crew = await crewService.getById(crew);
+                if (!crew){
+                    return res.status(400).send(`Crew with id ${req.body.crew} not found`);
+                }
+            }
+            if(typeof rocket === 'number' ) {
+                rocket = await rocketService.getById(rocket);
+                if (!rocket){
+                    return res.status(400).send(`Rocket with id ${req.body.rocket} not found`);
+                }
+            }
+            const newLaunch = new Launch(
+                req.body.launchCode,
+                req.body.date,
+                req.body.success,
+                rocket,
+                crew,
+            );
+            const obj = await launchService.update(req.body.id, newLaunch);
+            return res.json(obj);
+        } catch (err) {
+            console.log(err);
             return res.status(500).send(`${err}`);
         }
     }

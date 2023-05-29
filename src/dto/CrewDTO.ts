@@ -4,11 +4,13 @@ import { CrewManDTO } from "./CrewmanDTO";
 export class CrewDTO{
   id: number;
   name: string;
-  crewman: CrewManDTO[];
+  crewman: number[];
 
   constructor(crew: Crew){
     this.id = crew.id;
     this.name = crew.name;
-    this.crewman = crew.crewman;
+    crew.crewman.forEach((crewman) => {
+      this.crewman.push(crewman.id);
+    });
   } 
 }
