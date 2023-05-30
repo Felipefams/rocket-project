@@ -10,7 +10,7 @@ import "./assets/css/index.css"
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { CrewComponent, CrewmanComponent, LaunchComponent, RocketComponent } from './routes'
+import { CrewComponent, CrewmanComponent, HomeComponent, LaunchComponent, RocketComponent } from './routes'
 
 
 const router = createBrowserRouter([
@@ -18,6 +18,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
+      {
+        path: '',
+        element: <HomeComponent />,
+      },
       {
         path: 'launchs',
         element: <LaunchComponent />,

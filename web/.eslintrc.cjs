@@ -17,7 +17,7 @@ module.exports = {
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react/jsx-runtime",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
     ],
     "overrides": [
     ],
@@ -28,8 +28,10 @@ module.exports = {
     },
     "plugins": [
         "react",
+        "prettier",
         "@typescript-eslint"
     ],
     "rules": {
+        "prettier/prettier": ["error", {endOfLine: "auto"}]
     }
 }

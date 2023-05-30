@@ -22,14 +22,14 @@
 }
 
 .add-button {
-    background-color:var(--green-button);
+    background-color: var(--green-button);
     color: white;
 }
 
 .table-title {
     background-color: var(--black);
     color: var(--ivory);
-    padding: 1rem; 
+    padding: 1rem;
 }
 
 /* 
@@ -102,4 +102,27 @@ td {
     border-radius: 0.5rem;
     border: #747474 solid;
     cursor: pointer;
+}
+
+#home-div {
+    align-self: center;
+    margin: auto;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center; 
+}
+
+#home-text {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #FBFFE1;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
 }

@@ -1,29 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Launch } from "../../interfaces/launch";
 import { createLaunch, updateLaunch } from "../../api/launchApi";
 import { FormInput } from "../form/formInput";
+import { DataContext } from "../contexts/dataContext";
 
 export function LaunchModal(props: { closeModal: () => void, keys: string[], object: Launch, isEditModal: boolean }) {
     const [formData, setFormData] = React.useState<Launch>(props.object);
+    const { changeData } = useContext(DataContext);
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name, value, type, checked } = event.target;
         setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
     }
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         formData.launchCode = Number(formData.launchCode);
         formData.crew = Number(formData.crew);
         formData.rocket = Number(formData.rocket);
-        if (props.isEditModal) updateLaunch(formData);
-        else createLaunch(formData);
+        if (props.isEditModal) await updateLaunch(formData);
+        else await createLaunch(formData);
 
-        console.log(formData);
+        changeData();
     }
 
-
-    const isEdit = props.isEditModal ? "edit" : "add";
+    const isEdit = props.isEditModal ? "Edit" : "Add";
     const crew: string = formData.crew?.toString() ?? "";
     const rocket: string = formData.rocket?.toString() ?? "";
     const launchCode: string = formData.launchCode?.toString() ?? "";
@@ -34,7 +35,7 @@ export function LaunchModal(props: { closeModal: () => void, keys: string[], obj
         <div className="modal">
             <div className="modal-content">
                 <div>
-                    <h2>{isEdit ? "Edit" : "Add"} Rocket</h2>
+                    <h2>{isEdit} Rocket</h2>
                     <button className="close" onClick={props.closeModal}>&times;</button>
                 </div>
                 <form className="form" onSubmit={handleSubmit}>
@@ -43,7 +44,7 @@ export function LaunchModal(props: { closeModal: () => void, keys: string[], obj
                     <FormInput type="text" value={rocket} name="rocket" onChange={handleChange} />
                     <FormInput type="text" value={crew} name="crew" onChange={handleChange} />
                     <FormInput type="checkbox" checked={success} name="success" onChange={handleChange} />
-                    <button type="submit" className="button" id={`${isEdit}-save-button`}>Save</button>
+                    <button type="submit" className="button" id={`${isEdit.toLowerCase()}-save-button`}>Save</button>
                 </form>
             </div>
         </div>

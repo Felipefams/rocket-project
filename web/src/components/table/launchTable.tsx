@@ -8,6 +8,12 @@ export function LaunchTable(props: { data: Launch[] }) {
 
     const keys = Object.keys(props.data[0]);
     const data = isEditModal ? props.data[currentModal] : {};
+
+    if (isModalOpen) {
+        document.querySelector("html")?.style.setProperty("overflow", "hidden");
+    } else {
+        document.querySelector("html")?.style.setProperty("overflow", "auto");
+    }
     return (
         <>
             <Table handle={openModal} name={"Launch!"} setIsEdit={setEditModal}>
