@@ -5,17 +5,15 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    font-size: small;
+    font-size: large;
 }
 
 html,
 body {
+    margin: 0;
+    padding: 0;
     max-width: 100%;
     overflow-x: hidden;
-}
-
-
-body {
     max-width: 100%;
     overflow-x: hidden;
     display: flex;
@@ -23,6 +21,7 @@ body {
     background: #333;
     min-height: 100vh;
 }
+
 
 .footer {
     position: relative;

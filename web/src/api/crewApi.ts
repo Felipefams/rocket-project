@@ -6,8 +6,8 @@ export async function getAllCrew() {
         const response = await fetch(`${localhost}/crew`);
         if (!response.ok) throw new Error(response.statusText);
         const jsonData: Crew[] = await response.json();
-        jsonData.map((crew) => {
-            crew.crewman = crew.crewman?.map(crewman => crewman.id);
+        jsonData.map((crew: Crew) => {
+            crew.crewman = crew.crewman?.map( crewman => crewman.id);
         });
         return jsonData;
     } catch (error) {

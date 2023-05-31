@@ -18,7 +18,6 @@ export function HomeComponent() {
   return (
     <div id="home-div">
       <h1 id="home-text">Your Best Rocket Launching Platform!</h1>
-      {/* <img src="../assets/images/loading200px.gif" alt="" /> */}
     </div>
   );
 }

@@ -1,5 +1,3 @@
-import { Crew } from "./crew";
-import { Rocket } from "./rocket";
 
 export interface Launch {
     id?: number;

@@ -112,9 +112,11 @@ td {
     display: flex;
     justify-content: center;
     align-content: center; 
+    text-align: center;
 }
 
 #home-text {
+    padding: 10;
     font-family: Georgia, serif;
     font-size: 25px;
     letter-spacing: 2px;
