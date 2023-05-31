@@ -7,7 +7,8 @@ export const DataContext = createContext<{
   changeData: () => void;
 }>({
   dataChanged: false,
-  changeData: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  changeData: () => {} 
 });
 
 type DataProviderProps = {
