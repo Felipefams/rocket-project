@@ -2,11 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 
+import './i18n/config';
+
 import "./assets/css/table.css"
 import "./assets/css/footer.css"
 import "./assets/css/navbar.css"
 import "./assets/css/modal.css"
 import "./assets/css/index.css"
+
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
@@ -27,7 +30,7 @@ const router = createBrowserRouter([
         element: <LaunchComponent />,
       },
       {
-        path: 'crewman',
+        path: 'crewmen',
         element: <CrewmanComponent />,
       },
       {

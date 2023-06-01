@@ -2,12 +2,14 @@ import React from "react";
 import { colors, darkHover, mdDarkHover, mdHover } from "../assets/colors";
 import { RocketSVG } from "./rocket-svg";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "./languageSelector";
 
 //todo change a tag to Link
-function NavItem(props: { text: string, color: string }) {
+function NavItemWithLink(props: {link: string, text: string, color: string }) {
     return (
         <li>
-            <Link to={props.text.toLowerCase()} className={`block py-2 pl-3 pr-4 text-gray-900 
+            <Link to={props.link.toLowerCase()} className={`block py-2 pl-3 pr-4 text-gray-900 
                             rounded hover:bg-myBlack md:hover:bg-myBlack md:border-0 
                             ${mdHover[props.color]} md:p-0 dark:text-myIvory 
                             ${mdDarkHover[props.color]} dark:hover:bg-myLightGray
@@ -30,7 +32,9 @@ function getPathColor(path: string): string {
 export function Navbar() {
     const [on, setOn] = React.useState(true);
     const router = useLocation();
-    const color = getPathColor(router.pathname.toString()); 
+    const color = getPathColor(router.pathname.toString());
+
+    const { t } = useTranslation();
 
     function handle() {
         setOn(!on);
@@ -38,10 +42,10 @@ export function Navbar() {
     const hidden = on ? "hidden" : "";
     return (
         <nav className="border-gray-200 dark:bg-myBlack">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div className="max-w-screen-full flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link to="/" className="flex items-center">
                     <RocketSVG fill={color} className="icon flat-line h-10 mr-3}" />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Home</span>
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{t("home")}</span>
                 </Link>
                 <button onClick={handle} data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
                     <span className="sr-only">Open main menu</span>
@@ -49,10 +53,11 @@ export function Navbar() {
                 </button>
                 <div className={`${hidden} w-full md:block md:w-auto`} id="navbar-default">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-myBlack md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-myBlack md:dark:bg-inherit dark:border-myIvory">
-                        <NavItem text="Rockets" color="myRed" />
-                        <NavItem text="Crewman" color="myPink" />
-                        <NavItem text="Crews" color="myOrange" />
-                        <NavItem text="Launchs" color="myBlue" />
+                        <NavItemWithLink link="rockets" text={t('rockets')} color="myRed" />
+                        <NavItemWithLink link="crewmen" text={t("crewmen")} color="myPink" />
+                        <NavItemWithLink link="crews" text={t("crews")} color="myOrange" />
+                        <NavItemWithLink link="launchs" text={t("launches")} color="myBlue" />
+                        <LanguageSelector />
                     </ul>
                 </div>
             </div>

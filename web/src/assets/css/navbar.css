@@ -7,6 +7,9 @@
     display: flex;
     position: absolute;
 }
+.nav-dropdown{
+    --tw-ring-color: none;
+}
 .navbar-list {
     display: flex;
     justify-content: space-between;

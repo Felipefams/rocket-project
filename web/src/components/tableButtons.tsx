@@ -4,9 +4,13 @@ import { deleteCrew } from "../api/crewApi";
 import { deleteLaunch } from "../api/launchApi";
 import { deleteRocket } from "../api/rocketApi";
 import { deleteCrewman } from "../api/crewmanApi";
+import { useTranslation } from "react-i18next";
+import { DataContext } from "./contexts/dataContext";
+import { useContext } from "react";
 
 
-export function AddButton(props: { handle: () => void , setIsEdit: (isEdit: boolean) => void}) {
+export function AddButton(props: { handle: () => void, setIsEdit: (isEdit: boolean) => void }) {
+    const { t } = useTranslation();
     function handleBoth() {
         props.setIsEdit(false);
         props.handle();
@@ -14,7 +18,7 @@ export function AddButton(props: { handle: () => void , setIsEdit: (isEdit: bool
     return (
         <div className="add-button-div">
             <button className="button add-button" onClick={handleBoth}>
-                add
+                {t("add")}
             </button>
         </div>
     )
@@ -26,33 +30,36 @@ export function EditButton(props: { id: number, handle: () => void, setModalNumb
         props.handle();
         props.setModalNumber(props.id);
     }
+    const { t } = useTranslation();
     return (
         <button className="button edit-button" onClick={handleBoth}>
-            edit
+            {t("edit")}
         </button>
     )
 }
 
-export function DeleteButton(props: { id: number, type: string}) {
+export function DeleteButton(props: { id: number, type: string }) {
+    const { t } = useTranslation();
+    const { changeData } = useContext(DataContext);
 
-
-    function deleteItem() {
-        if(props.type === "crew")
-            deleteCrew(props.id);
-        else if(props.type === "launch")
-            deleteLaunch(props.id);
-        else if(props.type === "rocket")
-            deleteRocket(props.id);
-        else if(props.type === "crewman")
-            deleteCrewman(props.id);
+    async function deleteItem() {
+        if (props.type === "crew")
+            await deleteCrew(props.id);
+        else if (props.type === "launch")
+            await deleteLaunch(props.id);
+        else if (props.type === "rocket")
+            await deleteRocket(props.id);
+        else if (props.type === "crewman")
+            await deleteCrewman(props.id);
         else
             throw new Error("Invalid type");
-        
+
+        changeData();
     }
 
     return (
         <button className="button delete-button" onClick={deleteItem}>
-            delete
+            {t("delete")}
         </button>
     )
 }

@@ -3,10 +3,12 @@ import { Launch } from "../../interfaces/launch";
 import { createLaunch, updateLaunch } from "../../api/launchApi";
 import { FormInput } from "../form/formInput";
 import { DataContext } from "../contexts/dataContext";
+import { useTranslation } from "react-i18next";
 
 export function LaunchModal(props: { closeModal: () => void, keys: string[], object: Launch, isEditModal: boolean }) {
     const [formData, setFormData] = React.useState<Launch>(props.object);
     const { changeData } = useContext(DataContext);
+    const { t } = useTranslation();
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name, value, type, checked } = event.target;
@@ -24,7 +26,7 @@ export function LaunchModal(props: { closeModal: () => void, keys: string[], obj
         changeData();
     }
 
-    const isEdit = props.isEditModal ? "Edit" : "Add";
+    const isEdit = props.isEditModal ? t("edit") : t("add");
     const crew: string = formData.crew?.toString() ?? "";
     const rocket: string = formData.rocket?.toString() ?? "";
     const launchCode: string = formData.launchCode?.toString() ?? "";
@@ -35,7 +37,7 @@ export function LaunchModal(props: { closeModal: () => void, keys: string[], obj
         <div className="modal">
             <div className="modal-content">
                 <div>
-                    <h2>{isEdit} Rocket</h2>
+                    <h2>{isEdit} {t("launches")}</h2>
                     <button className="close" onClick={props.closeModal}>&times;</button>
                 </div>
                 <form className="form" onSubmit={handleSubmit}>
@@ -44,7 +46,7 @@ export function LaunchModal(props: { closeModal: () => void, keys: string[], obj
                     <FormInput type="text" value={rocket} name="rocket" onChange={handleChange} />
                     <FormInput type="text" value={crew} name="crew" onChange={handleChange} />
                     <FormInput type="checkbox" checked={success} name="success" onChange={handleChange} />
-                    <button type="submit" className="button" id={`${isEdit.toLowerCase()}-save-button`}>Save</button>
+                    <button type="submit" className="button" id={`${props.isEditModal ? "edit" : "add"}-save-button`}>Save</button>
                 </form>
             </div>
         </div>

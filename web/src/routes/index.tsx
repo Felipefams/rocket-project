@@ -13,11 +13,13 @@ import { CrewmanTable } from "../components/table/crewmanTable";
 import { LaunchTable } from "../components/table/launchTable";
 import { RocketTable } from "../components/table/rocketTable";
 import { DataContext } from "../components/contexts/dataContext";
+import { useTranslation } from "react-i18next";
 
 export function HomeComponent() {
+  const { t } = useTranslation();
   return (
     <div id="home-div">
-      <h1 id="home-text">Your Best Rocket Launching Platform!</h1>
+      <h1 id="home-text">{t("main-text")}</h1>
     </div>
   );
 }
