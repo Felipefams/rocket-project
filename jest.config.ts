@@ -8,8 +8,7 @@ export default {
   clearMocks: true,
   coverageProvider: "v8",
   testMatch: [
-    "**/__tests__/**/*.[jt]s?(x)",
-    "**/?(*.)+(spec|test).[tj]s?(x)"
+    "<rootDir>/test/**/?(*.)+(spec|test).[tj]s?(x)",
   ], 
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   collectCoverageFrom: [
