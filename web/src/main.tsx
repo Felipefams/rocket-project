@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element: <HomeComponent />,
       },
       {
-        path: 'launchs',
+        path: 'launches',
         element: <LaunchComponent />,
       },
       {

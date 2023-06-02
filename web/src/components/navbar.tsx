@@ -24,7 +24,7 @@ function getPathColor(path: string): string {
     if (path === "/rockets") return colors["myRed"];
     else if (path == "/crewman") return colors["myPink"];
     else if (path === "/crews") return colors["myOrange"];
-    else if (path === "/launchs") return colors["myBlue"];
+    else if (path === "/launches") return colors["myBlue"];
 
     return colors["myIvory"];
 }
@@ -56,7 +56,7 @@ export function Navbar() {
                         <NavItemWithLink link="rockets" text={t('rockets')} color="myRed" />
                         <NavItemWithLink link="crewmen" text={t("crewmen")} color="myPink" />
                         <NavItemWithLink link="crews" text={t("crews")} color="myOrange" />
-                        <NavItemWithLink link="launchs" text={t("launches")} color="myBlue" />
+                        <NavItemWithLink link="launches" text={t("launches")} color="myBlue" />
                         <LanguageSelector />
                     </ul>
                 </div>
