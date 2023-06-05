@@ -9,7 +9,7 @@ function LanguageSelector() {
 
     return (
         <li>
-            <select
+            <select data-testid="languageSelector"
                 className="py-2 pl-3 pr-4 text-gray-900 
         rounded bg-myBlack hover:bg-myBlack md:hover:bg-myBlack 
         md:border-0 md:p-0 dark:text-myIvory outline-none focus:ring-myBlack"

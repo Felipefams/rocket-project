@@ -1,6 +1,7 @@
 export const RocketSVG = (props: {fill: string, className: string}) => (
     <svg
         fill={props.fill}
+        data-testid="rocket-svg"
         stroke="#747474"
         strokeWidth={1}
         viewBox="0 0 24 24"

@@ -41,7 +41,7 @@ export function Navbar() {
     }
     const hidden = on ? "hidden" : "";
     return (
-        <nav className="border-gray-200 dark:bg-myBlack">
+        <nav className="border-gray-200 dark:bg-myBlack" data-testid="navbar">
             <div className="max-w-screen-full flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link to="/" className="flex items-center">
                     <RocketSVG fill={color} className="icon flat-line h-10 mr-3}" />
