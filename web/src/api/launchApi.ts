@@ -18,6 +18,7 @@ export const getAllLaunch = async () => {
 };
 
 export async function createLaunch(data: Launch){
+    data.success = data.success ?? false;
     try {
         const response = await fetch(`${localhost}/launch`, {
             method: "POST",
