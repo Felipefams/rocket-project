@@ -8,7 +8,7 @@ import "./assets/css/table.css"
 import "./assets/css/footer.css"
 import "./assets/css/navbar.css"
 import "./assets/css/modal.css"
-import "./assets/css/index.css"
+import "./assets/css/tailwind.css"
 
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
