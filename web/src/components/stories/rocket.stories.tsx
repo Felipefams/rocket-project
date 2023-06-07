@@ -5,8 +5,6 @@ import { Meta, StoryFn } from "@storybook/react";
 import { RocketTable } from "../table/rocketTable";
 import { JSX } from "react/jsx-runtime";
 import { RocketModal } from "../modal/rocketModal";
-import { object } from "prop-types";
-import { Rocket } from "../../interfaces/rocket";
 
 const rocketObj = {
     id: 1,
@@ -14,14 +12,13 @@ const rocketObj = {
 };
 
 export const Default: StoryFn = (args) => {
-
     return <RocketTable data={[
         rocketObj
     ]} {...args} />;
 }
 
 export default {
-    title: "Components/RocketTable",
+    title: "Components/Rocket",
     component: RocketTable,
     decorators: [
         (Story: any) => (
