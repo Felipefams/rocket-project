@@ -1,0 +1,856 @@
+openapi: 3.0.3
+info:
+  title: Rocket Project API
+  description: |-
+    The Rocket Launch Control System is a brainchild crafted during the Plank Fellowship Program to mimic the supervision and administration of rocket liftoffs. Its purpose is to facilitate the handling of rockets, launches, crews, and crew members. This remarkable system endeavors to simulate the myriad aspects entailed in the preparation and execution of a rocket launch.
+
+    
+    Some useful links:
+    - [The Rocket Project repository](https://github.com/felipesilva-plank/rocket-project)
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: felipe.silva@joinplank.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://rocket-project-tan.vercel.app/
+tags:
+  - name: rocket
+    description: Everything about your Rockets!
+  - name: crewman
+    description: Access to your Crew members!
+  - name: crew
+    description: Operations about Crew!
+  - name: launch
+    description: Manipulate your launches!
+paths:
+  /rocket:
+    get:
+      tags:
+        - rocket
+      summary: Find rocket by ID
+      description: Returns a single rocket
+      operationId: getrocketById
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rocketWithId'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/rocketWithId'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: rocket not found
+      security:
+        - api_key: []
+        - rocketstore_auth:
+            - write:rockets
+            - read:rockets
+    post:
+      tags:
+        - rocket
+      summary: Add a new rocket
+      description: Add a new rocket
+      operationId: addrocket
+      requestBody:
+        description: Create a new rocket
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rocket'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/rocket'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/rocket'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rocket'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/rocket'
+        '405':
+          description: Invalid input
+      security:
+        - rocketstore_auth:
+            - write:rockets
+            - read:rockets
+  /rocket/{rocketId}:
+    get:
+      tags:
+        - rocket
+      summary: Find rocket by ID
+      description: Returns a single rocket
+      operationId: getRocketById
+      parameters:
+        - name: rocketId
+          in: path
+          description: ID of rocket to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rocket'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/rocket'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: rocket not found
+      security:
+        - api_key: []
+        - rocketstore_auth:
+            - write:rockets
+            - read:rockets
+    put:
+      tags:
+        - rocket
+      summary: Update an existing rocket
+      description: Update an existing rocket by Id
+      operationId: updaterocket
+      parameters:
+        - name: rocketId
+          in: path
+          description: ID of rocket to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+      requestBody:
+        description: Update an existent rocket in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rocket'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/rocket'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/rocket'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rocket'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/rocket'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: rocket not found
+        '405':
+          description: Validation exception
+      security:
+        - rocketstore_auth:
+            - write:rockets
+            - read:rockets
+    delete:
+      tags:
+        - rocket
+      summary: Deletes a rocket
+      description: delete a rocket
+      operationId: deleterocket
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: rocketId
+          in: path
+          description: rocket id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid rocket value
+      security:
+        - rocketstore_auth:
+            - write:rockets
+            - read:rockets
+  /launch:
+    post:
+      tags:
+        - launch
+      summary: Add a new launch
+      description: Add a new launch
+      operationId: addlaunch
+      requestBody:
+        description: Create a new launch
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/launch'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/launch'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/launch'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/launch'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/launch'
+        '405':
+          description: Invalid input
+      security:
+        - rocketstore_auth:
+            - write:launch
+    get:
+      tags:
+        - launch
+      summary: Get all launch
+      description: Get all launch
+      operationId: getAlllaunch
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/launch'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: rocket not found
+      security:
+        - api_key: []
+        - rocketstore_auth:
+            - read:launch
+  /launch/{launchId}:
+    get:
+      tags:
+        - launch
+      summary: Find launch by ID
+      description: Returns a single launch
+      operationId: getLaunchById
+      parameters:
+        - name: launchId
+          in: path
+          description: ID of launch to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/launch'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/launch'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: launch not found
+      security:
+        - api_key: []
+        - rocketstore_auth:
+            - read:launch
+    put:
+      tags:
+        - launch
+      summary: Update an existing launch
+      description: Update an existing launch by Id
+      operationId: updateLaunch
+      parameters:
+        - name: launchId
+          in: path
+          description: ID of launch to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+      requestBody:
+        description: Update an existent launch in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/launch'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/launch'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/launch'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/launch'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/launch'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: launch not found
+        '405':
+          description: Validation exception
+      security:
+        - rocketstore_auth:
+            - write:launch
+            - read:launch
+    delete:
+      tags:
+        - launch
+      summary: Deletes a launch
+      description: delete a launch
+      operationId: deleteLaunch
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: launchId
+          in: path
+          description: launch id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid launch value
+      security:
+        - rocketstore_auth:
+            - write:launch
+            - read:launch
+  /crewman:
+    post:
+      tags:
+        - crewman
+      summary: Add a new crewman
+      description: Add a new crewman
+      operationId: addCrewman
+      requestBody:
+        description: Create a new crewman
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/crewman'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/crewman'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/crewman'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/crewman'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/crewman'
+        '405':
+          description: Invalid input
+      security:
+        - rocketstore_auth:
+            - write:crewmen
+    get:
+      tags:
+        - crewman
+      summary: Get all crewmen
+      description: Get all crewmen
+      operationId: getAllCrewmen
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/crewman'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: crewman not found
+      security:
+        - api_key: []
+        - rocketstore_auth:
+            - read:crewmen
+  /crewman/{crewmanId}:
+    get:
+      tags:
+        - crewman
+      summary: Find crewman by ID
+      description: Returns a single crewman
+      operationId: getCrewmanById
+      parameters:
+        - name: crewmanId
+          in: path
+          description: ID of crewman to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/crewman'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/crewman'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: crewman not found
+      security:
+        - api_key: []
+        - rocketstore_auth:
+            - read:crewmen
+    put:
+      tags:
+        - crewman
+      summary: Update an existing crewman
+      description: Update an existing crewman by Id
+      operationId: updateCrewman
+      parameters:
+        - name: crewmanId
+          in: path
+          description: ID of crewman to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+      requestBody:
+        description: Update an existent crewman in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/crewman'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/crewman'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/crewman'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/crewman'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/crewman'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: crewman not found
+        '405':
+          description: Validation exception
+      security:
+        - rocketstore_auth:
+            - write:crewmen
+            - read:crewmen
+    delete:
+      tags:
+        - crewman
+      summary: Deletes a crewman
+      description: delete a crewman
+      operationId: deleteCrewman
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: crewmanId
+          in: path
+          description: crewman id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid crewman value
+      security:
+        - rocketstore_auth:
+            - write:crewmen
+            - read:crewmen
+  /crew:
+    post:
+      tags:
+        - crew
+      summary: Add a new crew
+      description: Add a new crew
+      operationId: addCrew
+      requestBody:
+        description: Create a new crew
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/crew'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/crew'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/crew'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/crew'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/crew'
+        '405':
+          description: Invalid input
+      security:
+        - rocketstore_auth:
+            - write:crews
+    get:
+      tags:
+        - crew
+      summary: Get all crews
+      description: Get all crews
+      operationId: getAllCrews
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/crew'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: crew not found
+      security:
+        - api_key: []
+        - rocketstore_auth:
+            - read:crews
+  /crew/{crewId}:
+    get:
+      tags:
+        - crew
+      summary: Find crew by ID
+      description: Returns a single crew
+      operationId: getCrewById
+      parameters:
+        - name: crewId
+          in: path
+          description: ID of crew to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/crew'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/crew'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: crew not found
+      security:
+        - api_key: []
+        - rocketstore_auth:
+            - read:crews
+    put:
+      tags:
+        - crew
+      summary: Update an existing crew
+      description: Update an existing crew by Id
+      operationId: updateCrew
+      parameters:
+        - name: crewId
+          in: path
+          description: ID of crew to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+      requestBody:
+        description: Update an existent crew in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/crew'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/crew'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/crew'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/crew'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/crew'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: crew not found
+        '405':
+          description: Validation exception
+      security:
+        - rocketstore_auth:
+            - write:crews
+            - read:crews
+    delete:
+      tags:
+        - crew
+      summary: Deletes a crew
+      description: delete a crew
+      operationId: deleteCrew
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: crewId
+          in: path
+          description: crew id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid crew value
+      security:
+        - rocketstore_auth:
+            - write:crews
+            - read:crews
+  components:
+    schemas:
+      rocket:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          rocketCode:
+            type: integer
+            format: int64
+          name:
+            type: string
+          manufacturer:
+            type: string
+          country:
+            type: string
+          active:
+            type: boolean
+        required:
+          - id
+          - rocketCode
+          - name
+          - manufacturer
+          - country
+          - active
+      launch:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          launchCode:
+            type: integer
+            format: int64
+          date:
+            type: string
+            format: date
+          crew:
+            type: integer
+            format: int64
+          rocket:
+            type: integer
+            format: int64
+          success:
+            type: boolean
+        required:
+          - id
+          - launchCode
+          - date
+          - crew
+          - rocket
+          - success
+      crewman:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          name:
+            type: string
+          patent:
+            type: string
+        required:
+          - id
+          - name
+          - patent
+      crew:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          name:
+            type: string
+          crewman:
+            type: array
+            items:
+              type: integer
+              format: int64
+        required:
+          - id
+          - name
+          - crewman
+components:
+  schemas:
+    rocket:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          type: integer
+          format: int64
+        name:
+          type: string
+      required:
+        - id
+        - name
+    launch:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        launchCode:
+          type: integer
+          format: int64
+        date:
+          type: string
+          format: date
+        crew:
+          type: integer
+          format: int64
+        rocket:
+          type: integer
+          format: int64
+        success:
+          type: boolean
+      required:
+        - id
+        - launchCode
+        - date
+        - crew
+        - rocket
+        - success
+    crewman:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        patent:
+          type: string
+      required:
+        - id
+        - name
+        - patent
+    crew:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        crewman:
+          type: array
+          items:
+            type: integer
+            format: int64
+      required:
+        - id
+        - name
+        - crewman

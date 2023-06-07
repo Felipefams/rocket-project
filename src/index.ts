@@ -1,5 +1,7 @@
 import 'reflect-metadata'
 import express from 'express';
+import YAML from 'yamljs';
+import swaggerui from 'swagger-ui-express';
 import * as Sentry from '@sentry/node';
 
 const app = express();
@@ -22,6 +24,8 @@ Sentry.init({
 app.use(Sentry.Handlers.requestHandler() as express.RequestHandler);
 app.use(Sentry.Handlers.tracingHandler());
 
+const swaggerDocument = YAML.load('./swagger.yaml');
+
 AppDataSource.initialize()
     .then(() => {
         console.log("Data Source has been initialized!")
@@ -38,6 +42,7 @@ function initializeApp() {
     app.use("/crew", CrewApi);
     app.use("/crewman", CrewmanApi);
     app.use("/launch", LaunchApi);
+    app.use("/api-docs", swaggerui.serve, swaggerui.setup(swaggerDocument));
     app.use(Sentry.Handlers.errorHandler() as express.ErrorRequestHandler);
 
     app.get("/debug-sentry", function mainHandler(req, res) {
